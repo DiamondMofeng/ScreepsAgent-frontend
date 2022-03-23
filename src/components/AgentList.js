@@ -1,0 +1,62 @@
+import React, { useEffect, useState } from "react"
+
+import SubmitForm from './SubmitForm'
+
+import agentService from "../services/agentService"
+
+
+/**
+ * 输入agents，仅做显示功能你
+ * @param {} user 
+ */
+const AgentList = ({ user, setNotice }) => {
+  // console.log("user", user)
+
+
+  const [agents, setAgents] = useState([])
+
+
+  useEffect(() => {
+
+    console.log("getting user's agents info", user)
+    agentService
+      .queryByUser(user)
+      // .then(res => console.log(res))
+      .then(res => setAgents(res))
+
+  }
+    , [user])
+
+
+  return (
+    <div>
+      <SubmitForm setNotice={setNotice} user={user}
+        agents={agents} setAgents={setAgents} />
+
+      <table border="1">
+        <tr>
+          <th>username</th>
+          <th>token</th>
+          <th>shard</th>
+          <th>path</th>
+        </tr>
+        {
+          agents.map(agent => (
+            <tr>
+              <td>{agent.username}</td>
+              <td>{agent.token}</td>
+              <td>{agent.shard}</td>
+              <td>{agent.path}</td>
+            </tr>
+          ))
+        }
+      </table>
+    </div>
+  )
+
+
+}
+
+
+
+export default AgentList
