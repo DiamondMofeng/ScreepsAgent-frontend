@@ -48,8 +48,22 @@ const queryByUser = async (user) => {
   return response.data
 }
 
+/**
+ * 摆烂了，用post删吧
+ * @param {Object} deleteInfo
+ * @returns 
+ */
+const removeByInfo = async (deleteInfo) => {
+  const config = { headers: { Authorization: token }, }
+
+  const removeUrl = `${C.baseUrl}/api/deleteAgent`
+  const response = await axios.post(removeUrl, deleteInfo, config)
+  return response.data
+}
+
+
 const agentService = {
-  test, create, queryByUser,
+  test, create, queryByUser, removeByInfo,
   setToken
 }
 

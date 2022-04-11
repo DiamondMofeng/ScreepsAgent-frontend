@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import SubmitForm from './SubmitForm'
 
 import agentService from "../services/agentService"
+import DeleteButton from "./DeleteButton"
 
 
 /**
@@ -28,6 +29,8 @@ const AgentList = ({ user, setNotice }) => {
     , [user])
 
 
+
+
   return (
     <div>
       <SubmitForm setNotice={setNotice} user={user}
@@ -39,6 +42,7 @@ const AgentList = ({ user, setNotice }) => {
           <th>token</th>
           <th>shard</th>
           <th>path</th>
+          <th>操作</th>
         </tr>
         {
           agents.map(agent => (
@@ -47,6 +51,7 @@ const AgentList = ({ user, setNotice }) => {
               <td>{agent.token}</td>
               <td>{agent.shard}</td>
               <td>{agent.path}</td>
+              <td><DeleteButton agentToDelete={agent} user={user} agents={agents} setAgents={setAgents} setNotice={setNotice} /></td>
             </tr>
           ))
         }
