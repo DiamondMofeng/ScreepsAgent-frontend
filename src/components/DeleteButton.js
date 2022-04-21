@@ -14,7 +14,8 @@ const DeleteButton = ({ agentToDelete, user, agents, setAgents, setNotice }) => 
     }
     console.log("deleteInfo", deleteInfo)
     try {
-      const res = await agentService.removeByInfo(deleteInfo)
+      await agentService.removeByInfo(deleteInfo)
+      // const res = await agentService.removeByInfo(deleteInfo)
       setNotice({
         type: "success",
         msg: `已删除`
