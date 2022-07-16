@@ -5,8 +5,9 @@ import C from '../../../utils/consts'
 const baseUrl = C.baseUrl + '/api/agents'
 
 let token = null
+let username = null
 const setToken = newToken => { token = newToken }
-
+const setUsername = newUsername => { username = newUsername }
 /**
  * 
  * @param {Object} newAgent 
@@ -48,23 +49,32 @@ const queryByUser = async (user) => {
   return response.data
 }
 
-/**
- * 摆烂了，用post删吧
- * @param {Object} deleteInfo
- * @returns 
- */
-const removeByInfo = async (deleteInfo) => {
-  const config = { headers: { Authorization: token } }
+//* 已弃用
+// /**
+//  * 摆烂了，用post删吧
+//  * @param {Object} deleteInfo
+//  * @returns 
+//  */
+// const removeByInfo = async (deleteInfo) => {
+//   const config = { headers: { Authorization: token } }
 
-  const removeUrl = `${C.baseUrl}/api/deleteAgent`
-  const response = await axios.post(removeUrl, deleteInfo, config)
+//   const removeUrl = `${C.baseUrl}/api/deleteAgent`
+//   const response = await axios.post(removeUrl, deleteInfo, config)
+//   return response.data
+// }
+
+const removeByID = async (id) => {
+  // const config = { headers: { Authorization: token } }
+  const config = { headers: { 'x-token': token, 'x-username': username } }
+
+  const removeUrl = `${C.baseUrl}/api/agents/${id}`
+  const response = await axios.delete(removeUrl, config)
   return response.data
 }
 
-
 const agentService = {
-  test, create, queryByUser, removeByInfo,
-  setToken
+  test, create, queryByUser, removeByID,
+  setToken, setUsername
 }
 
 export default agentService

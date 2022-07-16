@@ -29,11 +29,13 @@ const LoginForm = ({ user, setUser }) => {
 
       const res = await loginService.login(newLogin)
       const user = res.user
-      console.log('user: ', user);
+      // console.log('user: ', user);
 
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
       setUser(user)
+
       agentService.setToken(user.loginTOKEN)
+      agentService.setUsername(user.name)
 
       message.success('登陆成功！', 2)
 
@@ -75,13 +77,13 @@ const LoginForm = ({ user, setUser }) => {
       // const res = await userService.register(newUser)
       await userService.register(newUser)
 
-      message.success('注册成功! ',2)
+      message.success('注册成功! ', 2)
 
 
       // blogAddRef.current.toggleVisibility()
     }
     catch (e) {
-      
+
       message.error(`注册失败! 无效的用户名或密码`, 2)
 
     }

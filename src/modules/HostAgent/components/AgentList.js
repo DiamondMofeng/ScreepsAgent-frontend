@@ -42,25 +42,30 @@ const AgentList = ({ user }) => {
       {agents.length === 0 && <div>未查询到可用代理</div>}
       <Space>
         <Table dataSource={agents}>
-          <ColumnGroup title={"基本信息"} >
+          <ColumnGroup title={"基本信息"}>
             {/* <Column title={"username"} dataIndex={"username"} key={"username"} /> */}
-            <Column title={"token"} dataIndex={"token"} key={"token"} />
+            <Column title={"token"} dataIndex={"token"} key={"token"} align="center" />
             <Column title={"path"} dataIndex={"path"} key={"path"} />
             <Column title={"shard"} dataIndex={"shard"} key={"shard"} />
           </ColumnGroup>
           <ColumnGroup title={"私服信息"}>
             <Column title={"private_enable"} dataIndex={"private_enable"} key={"private_enable"} />
-            <Column title={"private_url"} dataIndex={"private_url"} key={"private_url"} />
+            <Column title={"private_url"} dataIndex={"private_url"} key={"private_url"} align="center" />
             <Column title={"private_username"} dataIndex={"private_username"} key={"private_username"} />
             <Column title={"private_password"} dataIndex={"private_password"} key={"private_password"} />
           </ColumnGroup>
-          <ColumnGroup title={"操作"}>
-            <Column title={"删除"}>
-              {/* <DeleteButton agentToDelete={} */}
-              {/* TODO DELETE BUTTON */}
-            </Column>
+          {/* <ColumnGroup title={"操作"}> */}
+          <Column title={"操作"} align="center"
+            dataIndex="id"
+            key="id"
+            render={(id) => (
+              <>
+                <DeleteButton idToDelete={id} agents={agents} setAgents={setAgents}>删除</DeleteButton>
+              </>
+            )}
+          >
 
-          </ColumnGroup>
+          </Column>
         </Table>
 
       </Space>

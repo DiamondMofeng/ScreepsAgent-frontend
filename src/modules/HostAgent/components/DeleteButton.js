@@ -1,36 +1,21 @@
-import { message } from "antd";
+import { Button, message } from "antd";
 import React from "react";
 import agentService from "../services/agentService";
 
-const DeleteButton = ({ agentToDelete, user, agents, setAgents }) => {
+const DeleteButton = ({ idToDelete, agents, setAgents }) => {
 
   const handleDelete = async () => {
-    const deleteInfo = {
-      username: agentToDelete.username,
-      loginTOKEN: user.loginTOKEN,
-      token: agentToDelete.token,
-      shard: agentToDelete.shard,
-      path: agentToDelete.path
-
-    }
-    console.log("deleteInfo", deleteInfo)
+    console.log("idToDelete", idToDelete);
     try {
-      await agentService.removeByInfo(deleteInfo)
+      await agentService.removeByID(idToDelete)
       // const res = await agentService.removeByInfo(deleteInfo)
       message.success("删除成功")
       // console.log(agents)
-      // console.log(agents.filter(a =>
-      //   a.token !== agentToDelete.token ||
-      //   a.shard !== agentToDelete.shard ||
-      //   a.path !== agentToDelete.path))
 
-      setAgents(agents.filter(a =>
-        a.token !== agentToDelete.token ||
-        a.shard !== agentToDelete.shard ||
-        a.path !== agentToDelete.path
-      ))
+      setAgents(agents.filter(a => a.id !== idToDelete))
     }
-    catch (err) {
+    catch (e) {
+      console.log(e)
       message.error('删除失败')
     }
 
@@ -40,7 +25,7 @@ const DeleteButton = ({ agentToDelete, user, agents, setAgents }) => {
 
 
   return (
-    <button onClick={handleDelete}>删除</button>
+    <Button onClick={handleDelete}>删除</Button>
   )
 
 }

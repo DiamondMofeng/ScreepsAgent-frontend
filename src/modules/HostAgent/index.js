@@ -17,6 +17,7 @@ const HostAgent = () => {
       const loggedUser = JSON.parse(loggedUserJSON)
       setUser(loggedUser)
       agentService.setToken(loggedUser.loginTOKEN)
+      agentService.setUsername(loggedUser.name)
     }
   }, [])
 
