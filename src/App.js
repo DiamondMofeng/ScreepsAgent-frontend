@@ -90,25 +90,13 @@ import './App.css'
 import { Layout, Menu, } from 'antd';
 import { Link, Route, Routes } from 'react-router-dom'
 import HostAgent from './modules/HostAgent';
+import Home from './modules/Home';
+import About from './modules/About';
 
 const { Header, Content, Footer } = Layout;
 
-const Home = () => {
-  return (
-    <div className='Home'>
-      Welcome to Mofeng's Screeps Agent
-    </div>
 
-  )
-}
-const About = () => {
-  return (
-    <div className='About'>
-      <p>这个人太懒了,什么也没写</p>
-      Powered by Ant Design!
-    </div>
-  )
-}
+
 
 const App = () => {
   return (
