@@ -13,7 +13,7 @@ const setToken = newToken => { token = newToken }
  * @returns 成功添加的agent OBJ
  */
 const create = async (newAgent) => {
-  const config = { headers: { Authorization: token }, }
+  const config = { headers: { Authorization: token }, validityState: (status) => status < 500 }
   const response = await axios.post(baseUrl, newAgent, config)
   return response.data
 }
@@ -54,7 +54,7 @@ const queryByUser = async (user) => {
  * @returns 
  */
 const removeByInfo = async (deleteInfo) => {
-  const config = { headers: { Authorization: token }, }
+  const config = { headers: { Authorization: token } }
 
   const removeUrl = `${C.baseUrl}/api/deleteAgent`
   const response = await axios.post(removeUrl, deleteInfo, config)

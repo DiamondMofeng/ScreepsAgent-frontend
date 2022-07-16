@@ -1,3 +1,6 @@
+import { Input } from "antd"
+
+
 import React, { useState } from "react"
 import agentService from '../services/agentService'
 import loginService from '../services/loginService'
@@ -79,7 +82,8 @@ const LoginForm = ({ user, setUser, setNotice }) => {
         return
       }
       // console.log('1')
-      const res = await userService.register(newUser)
+      // const res = await userService.register(newUser)
+      await userService.register(newUser)
 
       setNotice({ msg: `注册成功！`, type: '' })
       setTimeout(() => {
@@ -107,20 +111,24 @@ const LoginForm = ({ user, setUser, setNotice }) => {
         <form >
           <div>
             username
-            <input
+            <Input
               type="text"
               value={username}
               name="Username"
               onChange={({ target }) => setUsername(target.value)}
+              placeholder={"用户名"}
             />
           </div>
           <div>
             password
-            <input
+            <Input.Password
               type="password"
               value={password}
               name="Password"
-              onChange={({ target }) => setPassword(target.value)} />
+              onChange={({ target }) => setPassword(target.value)}
+              placeholder={"密码"}
+            />
+
           </div>
           <button onClick={handleLogin}>登录</button>
           <button onClick={handleRegister}>注册</button>

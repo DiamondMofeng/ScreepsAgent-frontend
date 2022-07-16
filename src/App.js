@@ -6,6 +6,8 @@ import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 
 import agentService from './services/agentService'
+
+import './App.css'
 import AgentList from './components/AgentList'
 
 
@@ -73,7 +75,7 @@ const App = () => {
         <Notification notice={notice} />
         <LoginForm setNotice={setNotice} user={user} setUser={setUser} />
         <AgentList setNotice={setNotice} user={user} />
-
+        <p/>
         <p>出问题在screeps群里@Mofeng</p>
       </div>
     )

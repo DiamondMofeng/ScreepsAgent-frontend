@@ -4,6 +4,8 @@ import SubmitForm from './SubmitForm'
 
 import agentService from "../services/agentService"
 import DeleteButton from "./DeleteButton"
+import { Table } from "antd"
+const { ColumnGroup, Column } = Table
 
 
 /**
@@ -36,27 +38,29 @@ const AgentList = ({ user, setNotice }) => {
       <SubmitForm setNotice={setNotice} user={user}
         agents={agents} setAgents={setAgents} />
 
-      <table border="1">
-        <tr>
-          <th>username</th>
-          <th>token</th>
-          <th>shard</th>
-          <th>path</th>
-          <th>操作</th>
-        </tr>
-        {
-          agents.map(agent => (
-            <tr>
-              <td>{agent.username}</td>
-              <td>{agent.token}</td>
-              <td>{agent.shard}</td>
-              <td>{agent.path}</td>
-              <td><DeleteButton agentToDelete={agent} user={user} agents={agents} setAgents={setAgents} setNotice={setNotice} /></td>
-            </tr>
-          ))
-        }
-      </table>
-    </div>
+      <Table dataSource={agents}>
+        <ColumnGroup title={"基本信息"} >
+          <Column title={"username"} dataIndex={"username"} key={"username"} />
+          <Column title={"token"} dataIndex={"token"} key={"token"} />
+          <Column title={"path"} dataIndex={"path"} key={"path"} />
+          <Column title={"shard"} dataIndex={"shard"} key={"shard"} />
+        </ColumnGroup>
+        <ColumnGroup title={"私服信息"}>
+          <Column title={"private_enable"} dataIndex={"private_enable"} key={"private_enable"} />
+          <Column title={"private_url"} dataIndex={"private_url"} key={"private_url"} />
+          <Column title={"private_username"} dataIndex={"private_username"} key={"private_username"} />
+          <Column title={"private_password"} dataIndex={"private_password"} key={"private_password"} />
+        </ColumnGroup>
+        <ColumnGroup title={"操作"}>
+          <Column title={"删除"}>
+            {/* <DeleteButton agentToDelete={} */}
+            {/* TODO DELETE BUTTON */}
+          </Column>
+
+        </ColumnGroup>
+      </Table>
+      {agents.length === 0 && <div>未查询到可用代理</div>}
+    </div >
   )
 
 
