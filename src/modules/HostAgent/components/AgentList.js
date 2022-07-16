@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import SubmitForm from './SubmitForm'
 
-import agentService from "../../services/agentService"
+import agentService from "../services/agentService"
 import DeleteButton from "./DeleteButton"
 import { Space, Table } from "antd"
 const { ColumnGroup, Column } = Table
@@ -12,7 +12,7 @@ const { ColumnGroup, Column } = Table
  * 输入agents，仅做显示功能你
  * @param {} user 
  */
-const AgentList = ({ user, setNotice }) => {
+const AgentList = ({ user }) => {
   // console.log("user", user)
 
 
@@ -21,7 +21,7 @@ const AgentList = ({ user, setNotice }) => {
 
   useEffect(() => {
 
-    console.log("getting user's agents info", user)
+    // console.log("getting user's agents info", user)
     agentService
       .queryByUser(user)
       // .then(res => console.log(res))
@@ -36,7 +36,7 @@ const AgentList = ({ user, setNotice }) => {
   return (
     <div>
 
-      <SubmitForm setNotice={setNotice} user={user}
+      <SubmitForm user={user}
         agents={agents} setAgents={setAgents} />
 
       {agents.length === 0 && <div>未查询到可用代理</div>}

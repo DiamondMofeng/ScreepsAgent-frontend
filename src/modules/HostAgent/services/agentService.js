@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import C from '../utils/consts'
+import C from '../../../utils/consts'
 
 const baseUrl = C.baseUrl + '/api/agents'
 

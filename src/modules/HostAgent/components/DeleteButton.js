@@ -1,7 +1,8 @@
+import { message } from "antd";
 import React from "react";
-import agentService from "../../services/agentService";
+import agentService from "../services/agentService";
 
-const DeleteButton = ({ agentToDelete, user, agents, setAgents, setNotice }) => {
+const DeleteButton = ({ agentToDelete, user, agents, setAgents }) => {
 
   const handleDelete = async () => {
     const deleteInfo = {
@@ -16,13 +17,7 @@ const DeleteButton = ({ agentToDelete, user, agents, setAgents, setNotice }) => 
     try {
       await agentService.removeByInfo(deleteInfo)
       // const res = await agentService.removeByInfo(deleteInfo)
-      setNotice({
-        type: "success",
-        msg: `已删除`
-      })
-      setTimeout(() => {
-        setNotice(null)
-      }, 10000)
+      message.success("删除成功")
       // console.log(agents)
       // console.log(agents.filter(a =>
       //   a.token !== agentToDelete.token ||
@@ -36,13 +31,7 @@ const DeleteButton = ({ agentToDelete, user, agents, setAgents, setNotice }) => 
       ))
     }
     catch (err) {
-      setNotice({
-        type: "error",
-        msg: `删除失败`
-      })
-      setTimeout(() => {
-        setNotice(null)
-      }, 10000)
+      message.error('删除失败')
     }
 
 

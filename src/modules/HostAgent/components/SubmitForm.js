@@ -1,11 +1,11 @@
-import { Input, Switch, Select, Space } from "antd"
-import React, { useState } from "react"
-import agentService from '../../services/agentService'
+import { Input, Switch, Select, Space, message } from "antd"
+import { useState } from "react"
+import agentService from '../services/agentService'
 
 const { Option } = Select;
 
 
-const AgentAddForm = ({ user, setNotice, setAgents, agents }) => {
+const AgentAddForm = ({ user, setAgents, agents }) => {
 
 
   const [token, setToken] = useState('')
@@ -28,13 +28,11 @@ const AgentAddForm = ({ user, setNotice, setAgents, agents }) => {
 
     //防止空数据
     if (private_enable === true && (private_url === '' || private_username === '' || private_password === '')) {
-      setNotice({ type: 'error', msg: `请填写完整的私服配置` })
-      setTimeout(() => { setNotice(null) }, 10000)
+      message.error('请填写完整的私服配置')
       return
     }
     if (private_enable === false && (token === '' || shard === '')) {
-      setNotice({ type: 'error', msg: `官服token、shard不可以为空` })
-      setTimeout(() => { setNotice(null) }, 10000)
+      message.error(`官服token、shard不可以为空`)
       return
     }
 
@@ -68,19 +66,13 @@ const AgentAddForm = ({ user, setNotice, setAgents, agents }) => {
 
       setAgents(agents.concat(response))
 
-      setNotice({ msg: `用户代理添加成功！`, type: '' })
-      setTimeout(() => {
-        setNotice(null)
-      }, 10000)
+      message.success('用户代理添加成功')
 
     }
     catch (e) {
       // console.log(e.response)
       let errMsg = e?.response?.data?.message ?? `用户代理添加失败！`
-      setNotice({ msg: errMsg, type: 'error' })
-      setTimeout(() => {
-        setNotice(null)
-      }, 10000)
+      message.error(errMsg)
     }
 
     setIsOnTesting(false)

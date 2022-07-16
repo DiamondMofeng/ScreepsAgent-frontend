@@ -1,14 +1,14 @@
-import { Input } from "antd"
-
-
 import React, { useState } from "react"
-import agentService from '../../services/agentService'
-import loginService from '../../services/loginService'
-import userService from '../../services/userService'
+
+import { Input, message } from "antd"
+
+import agentService from '../services/agentService'
+import loginService from '../services/loginService'
+import userService from '../services/userService'
 
 
 
-const LoginForm = ({ user, setUser, setNotice }) => {
+const LoginForm = ({ user, setUser }) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -35,20 +35,13 @@ const LoginForm = ({ user, setUser, setNotice }) => {
       setUser(user)
       agentService.setToken(user.loginTOKEN)
 
-      setNotice({ msg: `You have successfully login`, type: '' })
-      setTimeout(() => {
-        setNotice(null)
-      }, 10000)
+      message.success('登陆成功！', 2)
 
-
-      // blogAddRef.current.toggleVisibility()
     }
     catch (e) {
-      console.log('login failed')
-      setNotice({ msg: `登陆失败！无效的用户名或密码`, type: 'error' })
-      setTimeout(() => {
-        setNotice(null)
-      }, 10000)
+
+      message.error("登陆失败！无效的用户名或密码", 2)
+
     }
   }
 
@@ -75,30 +68,22 @@ const LoginForm = ({ user, setUser, setNotice }) => {
       }
 
       if (password.length < 4) {
-        setNotice({ msg: `注册失败！密码过短`, type: 'error' })
-        setTimeout(() => {
-          setNotice(null)
-        }, 10000)
+        message.error(`注册失败！密码过短`, 2)
         return
       }
       // console.log('1')
       // const res = await userService.register(newUser)
       await userService.register(newUser)
 
-      setNotice({ msg: `注册成功！`, type: '' })
-      setTimeout(() => {
-        setNotice(null)
-      }, 10000)
+      message.success('注册成功! ',2)
 
 
       // blogAddRef.current.toggleVisibility()
     }
     catch (e) {
-      console.log('create failed')
-      setNotice({ msg: `注册失败！无效的用户名或密码`, type: 'error' })
-      setTimeout(() => {
-        setNotice(null)
-      }, 10000)
+      
+      message.error(`注册失败! 无效的用户名或密码`, 2)
+
     }
   }
 
