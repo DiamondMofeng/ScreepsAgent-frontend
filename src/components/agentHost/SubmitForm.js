@@ -1,6 +1,6 @@
 import { Input, Switch, Select, Space } from "antd"
 import React, { useState } from "react"
-import agentService from '../services/agentService'
+import agentService from '../../services/agentService'
 
 const { Option } = Select;
 

@@ -1,14 +1,14 @@
 
 import React, { useState, useEffect } from 'react'
 
-import Notification from './components/Notification'
+import Notification from './components/agentHost/Notification'
 
-import LoginForm from './components/LoginForm'
+import LoginForm from './components/agentHost/LoginForm'
 
 import agentService from './services/agentService'
 
 import './App.css'
-import AgentList from './components/AgentList'
+import AgentList from './components/agentHost/AgentList'
 
 
 const App = () => {

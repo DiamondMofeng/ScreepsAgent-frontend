@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import SubmitForm from './SubmitForm'
 
-import agentService from "../services/agentService"
+import agentService from "../../services/agentService"
 import DeleteButton from "./DeleteButton"
 import { Space, Table } from "antd"
 const { ColumnGroup, Column } = Table

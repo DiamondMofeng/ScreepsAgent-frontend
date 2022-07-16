@@ -1,5 +1,5 @@
 import React from "react";
-import agentService from "../services/agentService";
+import agentService from "../../services/agentService";
 
 const DeleteButton = ({ agentToDelete, user, agents, setAgents, setNotice }) => {
 
