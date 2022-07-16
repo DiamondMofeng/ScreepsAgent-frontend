@@ -1,9 +1,11 @@
-import { Input, Switch, Select, Space, message } from "antd"
+import { Input, Switch, Select, Space, message, Row, Col } from "antd"
 import { useState } from "react"
 import agentService from '../services/agentService'
 
 const { Option } = Select;
 
+const PRE_WIDTH = 3
+const AFTER_WIDTH = 21
 
 const AgentAddForm = ({ user, setAgents, agents }) => {
 
@@ -82,73 +84,90 @@ const AgentAddForm = ({ user, setAgents, agents }) => {
 
 
   return (
-    <div>
-      <Space>
+    <>
+      <div className="agent-list" style={{ width: "50%" }}>
 
-        <form onSubmit={handleAddAgent}>
-          <span>
-            Token:<Input.Password
-              type="text"
-              value={token}
-              name="Token"
-              onChange={({ target }) => setToken(target.value)}
-            // placeholder={"有Memory权限的token"}
-
-
-            />
-          </span>
-          <div>Shard:
-            <Input
-              type="text"
-              value={shard}
-              name="shard"
-              onChange={({ target }) => setShard(target.value)}
-            // placeholder={"私服可以为空"}
-            />
-          </div>
-          <div>Path:
-            <Input
-              type="text"
-              value={path}
-              name="Path"
-              onChange={({ target }) => setPath(target.value)}
-            // placeholder={"Memory.{path}"}
-            />
-          </div>
-
+        <form onSubmit={handleAddAgent} >
+          <Row>
+            <Col span={PRE_WIDTH}>token:</Col>
+            <Col span={AFTER_WIDTH}>
+              <Input.Password
+                value={token}
+                name="Token"
+                onChange={({ target }) => setToken(target.value)}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={PRE_WIDTH}>shard:</Col>
+            <Col span={AFTER_WIDTH}>
+              <Input
+                type="text"
+                value={shard}
+                name="shard"
+                onChange={({ target }) => setShard(target.value)}
+              // placeholder={"私服可以为空"}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={PRE_WIDTH}>path:</Col>
+            <Col span={AFTER_WIDTH}>
+              <Input
+                type="text"
+                value={path}
+                name="Path"
+                onChange={({ target }) => setPath(target.value)}
+              // placeholder={"Memory.{path}"}
+              />
+            </Col>
+          </Row>
+          <p />
           私服<Switch
             checked={private_enable}
             onChange={setPrivate_enable}
           />
+          <p />
+
           <div className="privateServerInfo">
             {
               private_enable
                 ? <>
-                  url:<Input
-                    value={private_url}
-                    onChange={({ target }) => { setPrivate_url(target.value); }}
-                    addonBefore={(
-                      <Select onChange={(e) => setPrivate_url_prefix(e)} defaultValue="http://" className="select-before">
-                        <Option value="http://">http://</Option>
-                        <Option value="https://">https://</Option>
-                      </Select>
-                    )}
-                    placeholder={"ip:端口,如mofengfeng.com:21025"}
-                  />
-                  username:<Input
-                    value={private_username}
-                    onChange={({ target }) => setPrivate_username(target.value)}
-                    placeholder={"用户名/邮箱均可"}
-                  />
-                  password:<Input
-                    value={private_password}
-                    onChange={({ target }) => setPrivate_password(target.value)}
-                    type="password"
-                    placeholder={"私服设置的密码"}
-                  />
-
-
-
+                  <Row>
+                    <Col span={PRE_WIDTH}>URL:</Col>
+                    <Col span={AFTER_WIDTH}><Input
+                      value={private_url}
+                      onChange={({ target }) => { setPrivate_url(target.value); }}
+                      addonBefore={(
+                        <Select onChange={(e) => setPrivate_url_prefix(e)} defaultValue="http://" className="select-before">
+                          <Option value="http://">http://</Option>
+                          <Option value="https://">https://</Option>
+                        </Select>
+                      )}
+                      placeholder={"ip:端口,如mofengfeng.com:21025"}
+                    />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span={PRE_WIDTH}>username:</Col>
+                    <Col span={AFTER_WIDTH}>
+                      <Input
+                        value={private_username}
+                        onChange={({ target }) => setPrivate_username(target.value)}
+                        placeholder={"用户名/邮箱均可"}
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span={PRE_WIDTH}>password:</Col>
+                    <Col span={AFTER_WIDTH}>
+                      <Input.Password
+                        value={private_password}
+                        onChange={({ target }) => setPrivate_password(target.value)}
+                        placeholder={"私服设置的密码"}
+                      />
+                    </Col>
+                  </Row>
 
                 </>
                 : null
@@ -156,10 +175,10 @@ const AgentAddForm = ({ user, setAgents, agents }) => {
           </div>
 
           <button type="submit" disabled={isOnTesting} >{isOnTesting ? "测试中..." : "测试并保存"}</button>
-
+          {/* </Row> */}
         </form>
-      </Space>
-    </div>
+      </div>
+    </>
   )
 }
 

@@ -43,38 +43,25 @@ const HostAgent = () => {
 
 
 
-  if (!user) {
-    return (
+  return (
 
-      <div>
-        <Header />
-
-
-        <LoginForm  user={user} setUser={setUser} />
-
-
-      </div>
-
-    )
-  }
-
-  else {
-    return (
-      <div>
-        <Header />
-
-
-        <LoginForm user={user} setUser={setUser} />
-        <AgentList user={user} />
-        <p />
-        <p>出问题在screeps群里@Mofeng</p>
-      </div>
-    )
-  }
-
-
-
-
+    <div className='host-agent'>
+      <Header />
+      <LoginForm user={user} setUser={setUser} />
+      {
+        (user)
+          ? (<>
+            <AgentList user={user} />
+            <p />
+            <p>出问题在screeps群里@Mofeng</p>
+          </>
+          )
+          : null
+      }
+    </div>
+  )
 }
+
+
 
 export default HostAgent;
