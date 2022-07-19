@@ -92,6 +92,8 @@ import { Link, Route, Routes } from 'react-router-dom'
 import HostAgent from './modules/HostAgent';
 import Home from './modules/Home';
 import About from './modules/About';
+import CombatPowerDetector from './modules/CombatPowerDetector';
+import RoomPicker from './modules/RoomPicket';
 
 const { Header, Content, Footer } = Layout;
 
@@ -109,20 +111,36 @@ const App = () => {
             mode="horizontal"
             defaultSelectedKeys={[window.location.hash.substring(2)]}
             items={[{
-              key: '', label: (
+              key: '',
+              label: (
                 <Link to='/' >首页</Link>
               )
             },
             {
-              key: 'host-agent', label: (
+              key: 'host-agent',
+              label: (
                 <Link to='/host-agent' >图表代理</Link>
               )
             },
             {
-              key: 'about', label: (
+              key: 'room-picker',
+              label: (
+                <Link to='/room-picker' >选房器</Link>
+              )
+            },
+            {
+              key: 'combat-power-detector',
+              label: (
+                <Link to='/combat-power-detector' >战斗力探测器</Link>
+              )
+            },
+            {
+              key: 'about',
+              label: (
                 <Link to='/about' >关于</Link>
               )
-            }]}
+            },
+            ]}
 
           />
         </Header>
@@ -130,6 +148,8 @@ const App = () => {
           <Routes >
             <Route path='/' element={<Home />} />
             <Route path='/host-agent' element={<HostAgent />} />
+            <Route path='/room-picker' element={<RoomPicker />} />
+            <Route path='/combat-power-detector' element={<CombatPowerDetector />} />
             <Route path='/about' element={<About />} />
           </Routes>
         </Content>
