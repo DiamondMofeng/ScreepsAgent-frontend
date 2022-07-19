@@ -1,5 +1,5 @@
 {
-  "name": "screeps-graph-agent-frontend",
+  "name": "screeps-agent-frontend-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
