@@ -25,7 +25,7 @@ const AgentList = ({ user }) => {
     agentService
       .queryByUser(user)
       // .then(res => console.log(res))
-      .then(res => setAgents(res.map(agent => ({ ...agent, private_enable: agent['private_enable'] ? 'Yes' : 'No' }))))
+      .then(res => setAgents(res.map(agent => ({ ...agent, private_enable: agent['private_enable'] === true ? 'Yes' : 'No' }))))
 
   }
     , [user])
@@ -43,18 +43,20 @@ const AgentList = ({ user }) => {
       <Space>
         <Table dataSource={agents}>
           <ColumnGroup title={"基本信息"}>
-            {/* <Column title={"username"} dataIndex={"username"} key={"username"} /> */}
-            <Column title={"token"} dataIndex={"token"} key={"token"} align="center" />
-            <Column title={"path"} dataIndex={"path"} key={"path"} />
-            <Column title={"shard"} dataIndex={"shard"} key={"shard"} />
+            {["token",
+              "path",
+              "shard",
+            ].map(key => (
+              <Column title={key} dataIndex={key} key={key} align='center' />))}
           </ColumnGroup>
           <ColumnGroup title={"私服信息"}>
-            <Column title={"private_enable"} dataIndex={"private_enable"} key={"private_enable"} />
-            <Column title={"private_url"} dataIndex={"private_url"} key={"private_url"} align="center" />
-            <Column title={"private_username"} dataIndex={"private_username"} key={"private_username"} />
-            <Column title={"private_password"} dataIndex={"private_password"} key={"private_password"} />
+            {["private_enable",
+              "private_url",
+              "private_username",
+              "private_password"
+            ].map(key => (
+              <Column title={key} dataIndex={key} key={key} align='center' />))}
           </ColumnGroup>
-          {/* <ColumnGroup title={"操作"}> */}
           <Column title={"操作"} align="center"
             dataIndex="id"
             key="id"
@@ -63,9 +65,8 @@ const AgentList = ({ user }) => {
                 <DeleteButton idToDelete={id} agents={agents} setAgents={setAgents}>删除</DeleteButton>
               </>
             )}
-          >
+          />
 
-          </Column>
         </Table>
 
       </Space>
