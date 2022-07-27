@@ -1,8 +1,12 @@
 
 import axios from 'axios'
 import C from '../../../utils/consts'
+// import { ScreepsAPI } from 'screeps-api'
 
 const baseUrl = C.baseUrl + '/api/power-detector'
+
+// const corsPrefix = C.corsUrl + '/'
+// const corsOfficialUrl = corsPrefix + 'screeps.com/api/'
 
 /**
  * 

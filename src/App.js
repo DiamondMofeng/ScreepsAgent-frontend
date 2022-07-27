@@ -93,7 +93,7 @@ import HostAgent from './modules/HostAgent';
 import Home from './modules/Home';
 import About from './modules/About';
 import CombatPowerDetector from './modules/CombatPowerDetector';
-import RoomPicker from './modules/RoomPicket';
+import RoomPicker from './modules/RoomPicker';
 
 const { Header, Content, Footer } = Layout;
 
