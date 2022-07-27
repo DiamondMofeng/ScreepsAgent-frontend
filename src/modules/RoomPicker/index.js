@@ -1,7 +1,7 @@
 
 const RoomPicker = () => {
   return (
-    <div className="RoomPicker">
+    <div className="RoomPicker" >
       <h1>选房器</h1>
       施工中...
     </div>
