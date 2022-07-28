@@ -1,3 +1,5 @@
+// import _ from "lodash";
+
 /**
  * 
  * @param {Function} func 
@@ -37,4 +39,21 @@ export function throttle(func, delay) {
       timer = null;
     }, delay);
   }
+}
+
+
+
+export function objSum(objArray) {
+
+  const res = {}
+  for (const obj of objArray) {
+    for (const key in obj) {
+      if (!res[key]) {
+        res[key] = 0
+      }
+      res[key] += obj[key]
+    }
+  }
+  return res
+
 }

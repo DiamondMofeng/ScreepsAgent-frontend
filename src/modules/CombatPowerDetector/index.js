@@ -5,7 +5,7 @@ import officialService from "../Common/services/officialService"
 import OverallInfo from "./components/OverallInfo"
 import RoomInfo from "./components/RoomInfo"
 import { Input, message } from "antd"
-import ShardRoomInfoList from "./components/ShardRoomInfoList"
+import ShardsRoomInfoList from "./components/ShardsRoomInfoList"
 
 const CombatPowerDetector = () => {
 
@@ -117,16 +117,9 @@ const CombatPowerDetector = () => {
 
 
       {/* <RoomInfo roomName="W17N15" shard="shard3" roomObjects={W12N16roomObjects} /> */}
-      <OverallInfo playerName={playerName} roomObjects={roomObjectsByShard} />
-      {
-        Object.keys(roomObjectsByShard).map(shardName => (
-          <ShardRoomInfoList
-            key={shardName}
-            shardName={shardName}
-            shardRoomsObjects={roomObjectsByShard[shardName]}
-          />
-        ))
-      }
+      <OverallInfo playerName={playerName} allShardsRoomsObjects={roomObjectsByShard} />
+      <ShardsRoomInfoList allShardRoomsObjects={roomObjectsByShard}
+      />
     </div>
   )
 }

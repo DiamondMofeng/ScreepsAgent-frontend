@@ -1,6 +1,10 @@
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { roomImgUrlPrefix } from "../../../utils/consts"
+
+import { Popover, Statistic } from "antd";
+import ResourcesView from "./ResourcesView";
+
 
 
 const style_RoomInfo = {
@@ -8,23 +12,11 @@ const style_RoomInfo = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  // width: "100%",
-  // height: "100%",
-  // backgroundColor: "rgba(0,0,0,0.5)",
   borderRadius: "5px",
   padding: "10px",
   boxSizing: "border-box",
-  // position: "absolute",
-  // top: "0",
-  // left: "0",
   zIndex: "100",
   overflow: "hidden",
-  pointerEvents: "none",
-  userSelect: "none",
-  WebkitUserSelect: "none",
-  MozUserSelect: "none",
-  MsUserSelect: "none",
-  OUserSelect: "none",
 }
 
 
@@ -40,17 +32,8 @@ const RoomInfo = (props) => {
   const canvasRef = useRef()
 
   //* Component Did Mount
-  //绑定悬浮效果
-  useEffect(() => {
-    const roomInfoDiv = roomInfoRef.current
 
 
-  }, [])
-
-
-  useEffect(() => {
-
-  }, [roomObjects])
 
 
 
@@ -70,8 +53,8 @@ const RoomInfo = (props) => {
     // "observer": "#ff00ff",
     // "powerSpawn": "#ffffff",
 
-
-    "default": "#808080",
+    "road":"#808080",
+    "default": "#d3d3d3",
 
   }
 
@@ -111,16 +94,94 @@ const RoomInfo = (props) => {
   }
 
 
+
+  const getControllerLevel = () => {
+    let controller = roomObjects.find(obj => obj.type === "controller")
+    return controller?.level ?? 0
+  }
+
+  const getMineralType = () => {
+    let mineral = roomObjects.find(obj => obj.type === "mineral")
+    return mineral?.mineralType ?? "none"
+  }
+
+  const getAvgWallHits = (raw = false) => {
+    let wallHits = 0;
+    let wallNums = 0;
+    for (let obj of roomObjects) {
+      if (["constructedWall", 'rampart'].includes(obj.type)) {
+        wallHits += obj.hits;
+        wallNums++;
+      }
+    }
+    let res = wallHits / wallNums;
+    if (raw) {
+      return res;
+    }
+
+    if (res > 1e6) {
+      return `${(res / 1e6).toFixed(2)}M`
+    }
+    if (res > 1e3) {
+      return `${(res / 1e3).toFixed(2)}K`
+    }
+    return res;
+
+  }
+
+  const getResources = () => {
+    let resources = {};
+    for (let obj of roomObjects) {
+      if (["storage", "terminal", "factory"].includes(obj.type)) {
+        for (let resName in obj.store) {
+          if (resources[resName] === undefined) {
+            resources[resName] = 0;
+          }
+          resources[resName] += obj.store[resName];
+        }
+      }
+    }
+    return resources;
+  }
+
+
+  const PopoverContent = () => {
+    return (
+      <div className="room-info-popover" style={{width:"500px"}}>
+        <h1>{`${shard}/${roomName}`}</h1>
+        <Statistic title="平均墙厚度" value={getAvgWallHits()} />
+        <ResourcesView resources={getResources()} />
+
+      </div>
+    )
+  }
+
+
+
   return (
     <div className="room-info" ref={roomInfoRef} style={style_RoomInfo}>
-      <img src={`${roomImgUrlPrefix}/${shard}/${roomName}.png`} alt={`${shard}/${roomName}`}
-        ref={imgRef} style={{ display: 'none' }}
-        onLoad={() => onImgLoad()} 
-        />
-      <canvas height={0} width={0} ref={canvasRef} />
-      <p>{roomName}</p>
+      <Popover trigger='hover' placement="bottom" content={<PopoverContent />}>
+        <a href={`https://screeps.com/a/#!/room/${shard}/${roomName}`} target='_blank' rel="noreferrer">
+          <img src={`${roomImgUrlPrefix}/${shard}/${roomName}.png`}
+            alt={`${shard}/${roomName}`}
+            ref={imgRef}
+            style={{ display: 'none' }}
+            onLoad={onImgLoad}
+          />
+          <canvas height={0} width={0} ref={canvasRef} />
+          <p style={{ textAlign: "center" }}>
+
+            <span style={{ textAlign: "left" }}>{roomName}_</span>
+            <span style={{ textAlign: "right" }}><b>{getControllerLevel()}</b> _{getMineralType()}</span>
+
+          </p>
+        </a>
+      </Popover>
     </div>
   )
 }
+
+
+
 
 export default RoomInfo;
