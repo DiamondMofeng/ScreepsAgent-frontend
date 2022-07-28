@@ -1,6 +1,7 @@
+import Badge from "../../Common/components/Badge"
 
 
-const OverallInfo = ({ playerName, allShardsRoomsObjects }) => {
+const OverallInfo = ({ playerName, badge, allShardsRoomsObjects }) => {
 
 
   const roomCountsByShard = {}
@@ -66,6 +67,7 @@ const OverallInfo = ({ playerName, allShardsRoomsObjects }) => {
       <h1>
         {playerName}
       </h1>
+      <Badge badge={badge} />
       <p>房间总数：{Object.values(roomCountsByShard).reduce((sum, cur) => sum + cur, 0)}</p>
       <p>资源总量:{JSON.stringify(resourceCounts).toString()}</p>
     </div>
