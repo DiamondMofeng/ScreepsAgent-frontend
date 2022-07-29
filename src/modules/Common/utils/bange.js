@@ -8,7 +8,6 @@
  * @returns 
  */
 export function renderBadge(canvas, badge, width, bgcolor = 'rgba(0,0,0,0)', outline = '#FFFFFF') {
-  console.log('badge: ', badge);
   width = width || 100
   var badgePaths = getBadgePaths()
   let colors = getColors()

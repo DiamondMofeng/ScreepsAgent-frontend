@@ -6,7 +6,7 @@ export const corsUrl = 'https://mofeng-cors-anywhere.herokuapp.com'
 
 export const roomImgUrlPrefix = 'https://d3os7yery2usni.cloudfront.net/map';//https://d3os7yery2usni.cloudfront.net/map/shard3/W19N14.png
 
-export const staticImgUrlPrefix = 'https://s3.amazonaws.com/static.screeps.com/upload/mineral-icons/L.png';//https://s3.amazonaws.com/static.screeps.com/upload/mineral-icons/L.png
+export const staticImgUrlPrefix = 'https://s3.amazonaws.com/static.screeps.com/upload';//https://s3.amazonaws.com/static.screeps.com/upload/mineral-icons/L.png
 
 export const gameConstants = {
   RESOURCE_ENERGY: "energy",
