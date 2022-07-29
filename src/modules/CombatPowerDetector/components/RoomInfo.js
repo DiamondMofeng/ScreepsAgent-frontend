@@ -1,3 +1,4 @@
+import "./RoomInfo.css"
 
 import { useRef } from "react";
 import { roomImgUrlPrefix } from "../../../utils/consts"
@@ -5,19 +6,9 @@ import { roomImgUrlPrefix } from "../../../utils/consts"
 import { Popover, Statistic } from "antd";
 import ResourcesView from "./ResourcesView";
 
+import { staticImgUrlPrefix } from "../../../utils/consts";
 
 
-const style_RoomInfo = {
-  display: "inline-block",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  borderRadius: "5px",
-  padding: "10px",
-  boxSizing: "border-box",
-  zIndex: "100",
-  overflow: "hidden",
-}
 
 
 
@@ -53,7 +44,7 @@ const RoomInfo = (props) => {
     // "observer": "#ff00ff",
     // "powerSpawn": "#ffffff",
 
-    "road":"#808080",
+    "road": "#808080",
     "default": "#d3d3d3",
 
   }
@@ -81,17 +72,8 @@ const RoomInfo = (props) => {
     }
   }
 
-  const onImgLoad = () => {
-    let img = imgRef.current
-    let canvas = canvasRef.current
-    canvas.width = img.width
-    canvas.height = img.height
-    let ctx = canvas.getContext("2d")
-    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height)
 
-    drawRoomObjects(ctx, canvas.height, canvas.width)
 
-  }
 
 
 
@@ -147,7 +129,7 @@ const RoomInfo = (props) => {
 
   const PopoverContent = () => {
     return (
-      <div className="room-info-popover" style={{width:"500px"}}>
+      <div className="room-info-popover" style={{ width: "500px" }}>
         <h1>{`${shard}/${roomName}`}</h1>
         <Statistic title="平均墙厚度" value={getAvgWallHits()} />
         <ResourcesView resources={getResources()} />
@@ -156,25 +138,46 @@ const RoomInfo = (props) => {
     )
   }
 
+  const onImgLoad = () => {
+    let img = imgRef.current
+    let canvas = canvasRef.current
+    canvas.width = img.width
+    canvas.height = img.height
+    canvas.style.opacity = "1"  //实现渐入效果
+    let ctx = canvas.getContext("2d")
+    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height)
 
+    drawRoomObjects(ctx, canvas.height, canvas.width)
+
+  }
 
   return (
-    <div className="room-info" ref={roomInfoRef} style={style_RoomInfo}>
+    <div className="room-info" ref={roomInfoRef} >
       <Popover trigger='hover' placement="bottom" content={<PopoverContent />}>
+        <img src={`${roomImgUrlPrefix}/${shard}/${roomName}.png`}
+          alt={`${shard}/${roomName}`}
+          ref={imgRef}
+          style={{ display: 'none' }}
+          onLoad={onImgLoad}
+          onError={(e) => console.log('image error', e)}
+
+
+        />
+        <canvas className="room-info-canvas" height={0} width={0} ref={canvasRef} style={{}} />
         <a href={`https://screeps.com/a/#!/room/${shard}/${roomName}`} target='_blank' rel="noreferrer">
-          <img src={`${roomImgUrlPrefix}/${shard}/${roomName}.png`}
-            alt={`${shard}/${roomName}`}
-            ref={imgRef}
-            style={{ display: 'none' }}
-            onLoad={onImgLoad}
-          />
-          <canvas height={0} width={0} ref={canvasRef} />
           <p style={{ textAlign: "center" }}>
-
-            <span style={{ textAlign: "left" }}>{roomName}_</span>
-            <span style={{ textAlign: "right" }}><b>{getControllerLevel()}</b> _{getMineralType()}</span>
-
+            {` ${roomName} `}
+            <img
+              src={`${staticImgUrlPrefix}/mineral-icons/${getMineralType()}.png`}
+              alt={getMineralType()}
+              style={{ verticalAlign: "-9.5%" }}
+            />
+            {` RCL ${getControllerLevel()} `}
           </p>
+
+
+
+
         </a>
       </Popover>
     </div>

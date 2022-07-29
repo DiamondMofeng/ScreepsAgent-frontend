@@ -17,10 +17,10 @@ const OverallInfo = ({ playerName, badge, allShardsRoomsObjects }) => {
     for (let roomName in allShardsRoomsObjects[shardName]) {
       const roomObjects = allShardsRoomsObjects[shardName][roomName]
       const roomResources = {}
-      for (let obj of roomObjects) {
+      for (let obj of Object.values(roomObjects)) {
 
-        if (["storage", "terminal", "factory"].includes(obj.type)) {
-          for (let resourceName in obj.store) {
+        if (["storage", "terminal", "factory"].includes(obj?.type)) {
+          for (let resourceName in obj?.store) {
             if (!roomResources[resourceName]) {
               roomResources[resourceName] = 0
             }

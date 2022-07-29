@@ -1,0 +1,18 @@
+ .room-info {
+   display: inline-block;
+   /* flexDirection: column;
+  alignItems: center; */
+   /* justifyContent: center; */
+   border-radius: 5px;
+   padding: 10px;
+   box-sizing: border-box;
+   z-index: 100;
+   overflow: hidden;
+   transition: 0.3s;
+ }
+
+ .room-info-canvas {
+   transition: 0.3s;
+   /* transition-property: opacity; */
+   opacity: 0;
+ }
