@@ -22,7 +22,7 @@ export const user_find = async (playername = undefined, id = undefined) => {
       id: id
     }
   })
-  return response.data["user"]["_id"]
+  return response.data["user"]
 }
 
 export const user_rooms = async (id) => {
