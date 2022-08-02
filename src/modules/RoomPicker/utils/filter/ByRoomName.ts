@@ -17,7 +17,6 @@ export function filter_byRoomName(rooms, ruleSet) {
     "ignoreHighwayRooms": ignoreHighwayRooms,
     "ignoreCenter9Rooms": ignoreCenter9Rooms,
     "onlyHighwayNeighbour": onlyHighwayNeighbour,
-
   }
   const filters = ruleSet.map(rule => ruleToFilter[rule])
   const filteredRooms = filters.reduce((acc, filter) => acc.filter(filter), rooms)
@@ -51,10 +50,28 @@ export function ignoreCenter9Rooms(roomName) {
  * 仅保留过道邻居房
  * 依据：坐标末尾包含1/9
  * @param {String} roomName 
+ * @param {Number} range
  * @returns 
  */
-export function onlyHighwayNeighbour(roomName) {
-  const reg_isHighwayNeighbour = /.*[19]$|.*[19][NnSs].*/
+export function onlyHighwayNeighbour(roomName, range) {
+  let reg_range;
+  switch (range) {
+    case 1:
+      reg_range = '91'
+      break;
+    case 2:
+      reg_range = '8912'
+      break;
+    case 3:
+      reg_range = '789123'
+      break;
+    default:
+      reg_range = '91'
+      break;
+  }
+
+  // /.*[19]$|.*[19][NnSs].*/
+  const reg_isHighwayNeighbour = new RegExp(`.*[${reg_range}]$|.*[${reg_range}][NnSs].*`, 'i')
   return roomName.match(reg_isHighwayNeighbour) !== null
 }
 
