@@ -1,7 +1,10 @@
 import { Button, Input } from "antd"
 import { useState } from "react"
+import SingleRule from "./components/Ruleset/SingleRule.tsx"
 import { getRoomsBetween } from "./utils/genRoomLists"
 
+
+import Rules from './config_rules.ts'
 
 const RoomPicker = () => {
 
@@ -23,9 +26,23 @@ const RoomPicker = () => {
       }
       } >test</Button>
 
+      {
+        Rules.map((rule, index) =>
+          <SingleRule rule={rule} />
+        )
+      }
+
 
     </div>
   )
 }
+
+
+// var fakeRule = {
+//   name: 'ruleName',
+//   description: 'ruleDescription',
+
+// }
+
 
 export default RoomPicker
