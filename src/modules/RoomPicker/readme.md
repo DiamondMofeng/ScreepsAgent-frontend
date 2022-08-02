@@ -23,7 +23,8 @@ rule sets:
 | -------------------- | ----- | ----------------------- |
 | ignoreHighwayRooms   | -     | 忽略过道房              |
 | ignoreCenterRooms    | -     | 忽略过滤掉中心9房       |
-| x range from highway | range | 仅保留离过道n格近的房间 |
+| onlyHighwayNeighbour | -     | 仅保留离过道1格近的房间 |
+<!-- | x range from highway | range | 仅保留离过道n格近的房间 | -->
 
 ## Filter by map stats ( 由 map stats 过滤 )：
 
