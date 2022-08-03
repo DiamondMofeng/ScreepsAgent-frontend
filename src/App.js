@@ -5,7 +5,7 @@ import HostAgent from './modules/HostAgent';
 import Home from './modules/Home';
 import About from './modules/About';
 import CombatPowerDetector from './modules/CombatPowerDetector';
-import RoomPicker from './modules/RoomPicker';
+import RoomPicker from './modules/RoomPicker/index.tsx';
 import PublicAPI from './modules/PublicAPI';
 
 const { Header, Content, Footer } = Layout;

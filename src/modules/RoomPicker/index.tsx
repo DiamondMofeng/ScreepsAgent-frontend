@@ -6,7 +6,9 @@ import { getRoomsBetween } from "./utils/genRoomLists"
 
 import Ruleset from "./components/Ruleset"
 
+//@ts-ignore
 import RoomsInput from "./components/RoomsInput.tsx"
+//@ts-ignore
 import InputedRoomsInfo from "./components/InputedRoomsInfo.tsx"
 
 const shards = ['shard0', 'shard1', 'shard2', 'shard3']
