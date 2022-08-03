@@ -4,7 +4,7 @@
 import { useState } from "react"
 import React from "react"
 
-import { Checkbox, Select, Input, Popover } from "antd"
+import { Checkbox, Select, Input, Popover, Row, Col } from "antd"
 import { IGNORE, ONLY } from "../../utils/C"
 
 
@@ -28,41 +28,47 @@ const SingleRule = ({ rule, val, setVal }: {
 
   return (
     <div className="single-rule">
-      <Popover content={rule?.description || '123'}>
-        <Checkbox checked={enabled} onChange={() => setEnabled(!enabled)} >
-          {enabled ? 'Enabled' : 'Disabled'}
-        </Checkbox>
-        <Select onSelect={(val) => setIgnoreOrOnly(val)} disabled={!enabled}>
-          <Select.Option value={ONLY}>only</Select.Option>
-          <Select.Option value={IGNORE}>ignore</Select.Option>
-        </Select>
-        < span > {rule.name} </span>
-        {
-          rule.uniqueVal
-            ?
-            <Select onSelect={(val) => setArgs(val)} disabled={!enabled}>
-              {rule.uniqueVal.map(v => <Select.Option key={v} value={v}>{v}</Select.Option>)}
+      <Popover content={rule?.description} placement='top'>
+        <Row style={{ width: "75%" }}>
+          <Col span={2}>
+            <Checkbox checked={enabled} onChange={() => setEnabled(!enabled)} >
+              {enabled ? 'Enabled' : 'Disabled'}
+            </Checkbox>
+          </Col>
+          <Col span={2}>
+            <Select onSelect={(val) => setIgnoreOrOnly(val)} disabled={!enabled} defaultValue={IGNORE}>
+              <Select.Option value={ONLY}>only</Select.Option>
+              <Select.Option value={IGNORE}>ignore</Select.Option>
             </Select>
-            : null
-        }
-        {
-          rule.multiVal
-            ?
-            <Checkbox.Group onChange={(val) => setArgs(val)} disabled={!enabled}>
-              {rule.multiVal.map(v => <Checkbox key={v} value={v}>{v}</Checkbox>)}
-            </Checkbox.Group>
-            : null
-        }
-        {
-          rule.freeVal
-            ?
-            <Input onChange={(e) => setArgs(e.target.value)} disabled={!enabled} />
-            : null
-        }
-
-
-
-
+          </Col>
+          <Col span={3}>
+            < span > {rule.name} </span>
+          </Col>
+          <Col span={8}>
+            {
+              rule.uniqueVal
+                ?
+                <Select onSelect={(val) => setArgs(val)} disabled={!enabled} defaultValue={rule.uniqueVal[0]}>
+                  {rule.uniqueVal.map(v => <Select.Option key={v} value={v}>{v}</Select.Option>)}
+                </Select>
+                : null
+            }
+            {
+              rule.multiVal
+                ?
+                <Checkbox.Group onChange={(val) => setArgs(val)} disabled={!enabled}>
+                  {rule.multiVal.map(v => <Checkbox key={v} value={v}>{v}</Checkbox>)}
+                </Checkbox.Group>
+                : null
+            }
+            {
+              rule.freeVal
+                ?
+                <Input onChange={(e) => setArgs(e.target.value)} disabled={!enabled} />
+                : null
+            }
+          </Col>
+        </Row>
       </Popover>
     </div >
   )

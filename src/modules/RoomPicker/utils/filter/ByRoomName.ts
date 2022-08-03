@@ -11,28 +11,28 @@
 */
 
 
-export function filter_byRoomName(rooms, ruleSet) {
+// export function filter_byRoomName(rooms, ruleSet) {
 
-  const ruleToFilter = {
-    "ignoreHighwayRooms": ignoreHighwayRooms,
-    "ignoreCenter9Rooms": ignoreCenter9Rooms,
-    "onlyHighwayNeighbour": onlyHighwayNeighbour,
-  }
-  const filters = ruleSet.map(rule => ruleToFilter[rule])
-  const filteredRooms = filters.reduce((acc, filter) => acc.filter(filter), rooms)
-  return filteredRooms
+//   const ruleToFilter = {
+//     "ignoreHighwayRooms": ignoreHighwayRooms,
+//     "ignoreCenter9Rooms": ignoreCenter9Rooms,
+//     "onlyHighwayNeighbour": onlyHighwayNeighbour,
+//   }
+//   const filters = ruleSet.map(rule => ruleToFilter[rule])
+//   const filteredRooms = filters.reduce((acc, filter) => acc.filter(filter), rooms)
+//   return filteredRooms
 
-}
+// }
 
 /**
- * 忽略高速房间 
+ * 判断是否为高速房间 
  * 依据：坐标结尾是否含有0
  * @param {String} roomName 
  * @returns {Boolean}
  */
-export function ignoreHighwayRooms(roomName) {
+export function isHighwayRooms(roomName) {
   const reg_isHighway = /.*0$|.*0[NnSs].*/
-  return roomName.match(reg_isHighway) === null
+  return roomName.match(reg_isHighway) !== null
 }
 
 /**
@@ -41,9 +41,9 @@ export function ignoreHighwayRooms(roomName) {
  * @param {String} roomName 
  * @returns {Boolean}
  */
-export function ignoreCenter9Rooms(roomName) {
+export function isCenter9Rooms(roomName) {
   const reg_isCenter9 = /[WwNn]\d*[456][NnSs]\d*[456]/
-  return roomName.match(reg_isCenter9) === null
+  return roomName.match(reg_isCenter9) !== null
 }
 
 /**
@@ -53,8 +53,8 @@ export function ignoreCenter9Rooms(roomName) {
  * @param {Number} range
  * @returns 
  */
-export function onlyHighwayNeighbour(roomName, range) {
-  let reg_range;
+export function isHighwayNeighbour(roomName: string, range: number) {
+  let reg_range: string;
   switch (range) {
     case 1:
       reg_range = '91'
@@ -75,5 +75,6 @@ export function onlyHighwayNeighbour(roomName, range) {
   return roomName.match(reg_isHighwayNeighbour) !== null
 }
 
+const exports = {}
 
-export default filter_byRoomName
+export default exports

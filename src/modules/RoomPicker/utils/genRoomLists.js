@@ -72,10 +72,39 @@ export function getRoomsBetween(fromRoom, toRoom) {
   // return uniq(rooms)
 }
 
+/**
+ * 获取以room为中心的range范围内的所有房间
+ * @param {String} room 
+ * @param {Number} range 
+ * @returns 
+ */
+export function getRoomsInRange(room, range) {
+  let parsedRoom = parseRoomName(room)
+
+  let toWS = parsedRoom[0]
+  let toWEInt = parsedRoom[1] - range
+  let toNS = parsedRoom[2]
+  let toNSInt = parsedRoom[3] - range
+  if (toWEInt < 0) {
+    toWEInt = -1 * toWEInt - 1
+    toWS = toWS === 'W' ? 'E' : 'W'
+  }
+  if (toNSInt < 0) {
+    toNSInt = -1 * toNSInt - 1
+    toNS = toNS === 'N' ? 'S' : 'N'
+  }
+
+  let fromRoom = parsedRoom[0] + String(parsedRoom[1] + range) + parsedRoom[2] + String(parsedRoom[3] + range)
+  let toRoom = toWS + String(toWEInt) + toNS + String(toNSInt)
+  return getRoomsBetween(fromRoom, toRoom)
+}
+
+
 
 const exports = {
   parseRoomName,
-  getRoomsBetween
+  getRoomsBetween,
+  getRoomsInRange
 }
 
 export default exports

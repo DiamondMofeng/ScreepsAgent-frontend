@@ -1,36 +1,28 @@
-import { Button, Input } from "antd"
+import React from "react"
 import { useState } from "react"
-import SingleRule from "./components/Ruleset/SingleRule.tsx"
 import { getRoomsBetween } from "./utils/genRoomLists"
 
 
-import Rules from './config_rules.ts'
+
+import Ruleset from "./components/Ruleset"
+
+import RoomsInput from "./components/RoomsInput.tsx"
+import InputedRoomsInfo from "./components/InputedRoomsInfo.tsx"
+
+const shards = ['shard0', 'shard1', 'shard2', 'shard3']
 
 const RoomPicker = () => {
 
-  const [room1, setRoom1] = useState('')
-  const [room2, setRoom2] = useState('')
-
+  const [roomsByShard, setRoomsByShard] = useState(Object.fromEntries(shards.map(shard => [shard, []])))
 
   return (
     <div className="RoomPicker" >
       <h1>选房器</h1>
       施工中...
-      <Input value={room1} onChange={(e) => setRoom1(e.target.value)} />
-      <Input value={room2} onChange={(e) => setRoom2(e.target.value)} />
-      <p />
-      <p />
-      <p />
-      <Button onClick={() => {
-        console.log(getRoomsBetween(room1, room2))
-      }
-      } >test</Button>
+      <RoomsInput setRoomsByShard={setRoomsByShard} />
+      <InputedRoomsInfo roomsByShard={roomsByShard} />
+      <Ruleset />
 
-      {
-        Rules.map((rule, index) =>
-          <SingleRule rule={rule} />
-        )
-      }
 
 
     </div>

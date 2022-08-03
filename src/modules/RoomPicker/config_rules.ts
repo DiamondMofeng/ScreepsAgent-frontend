@@ -1,16 +1,22 @@
+// @ts-ignore
+import { isHighwayNeighbour, isHighwayRooms, isCenter9Rooms } from "./utils/filter/ByRoomName.ts"
+
 export const byRoomName: Rule[] = [
   {
     name: 'HighwayRooms',
     description: '过道房,坐标末尾包括0',
+    filter: isHighwayRooms
   },
   {
     name: 'CenterRooms',
     description: '中心房,坐标末尾同时包括4/5/6',
+    filter: isCenter9Rooms
   },
   {
     name: 'HighwayNeighbour',
     description: '临近过道.参数为与过道最大距离',
     uniqueVal: [1, 2, 3],
+    filter: isHighwayNeighbour
   },
 ]
 
@@ -29,7 +35,7 @@ export const byMapStats: Rule[] = [
     description: '重生区',
   },
   {
-    name: 'NoviceOrRespawnArea',
+    name: 'NoviceAndRespawnArea',
     description: '新手区*和*重生区',
   },
   {
