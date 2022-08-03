@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { getRoomsBetween, getRoomsInRange } from "../utils/genRoomLists"
 
-import { Select, Input, Button, Popover, Row, Col } from "antd"
+import { Select, Input, Button, Popover, Row, Col, Space } from "antd"
 
 type InputTypes = 'all' | 'range' | 'between'
 const inputTypes: InputTypes[] = ['all', 'range', 'between']
@@ -47,7 +47,7 @@ const parseInputList = (inputList: InputedRooms[]): RoomsByShard => {
         break;
       case 'between':
         if (input.rooms!.length !== 2) {
-          throw new Error('between must have exactly 2 rooms')
+          throw new Error('between must have exactly 2 rooms')  //这里就作为Error了
         }
         result[input.shard] = result[input.shard].concat(getRoomsBetween(input.rooms![0], input.rooms![1]))
         break
@@ -55,7 +55,7 @@ const parseInputList = (inputList: InputedRooms[]): RoomsByShard => {
         break;
     }
   }
-  
+
   for (const shardName in result) {
     result[shardName] = Array.from(new Set(result[shardName]))  //uniq
   }
@@ -116,7 +116,7 @@ const RoomsInput = ({ setRoomsByShard }) => {
             {shards.map(shard => <Select.Option key={shard} value={shard}>{shard}</Select.Option>)}
           </Select>
         </Col>
-        <Col span={2}>
+        <Col span={3}>
           <Popover content={inputTypesDesc[type]}>
             <Select onSelect={handleTypeChange} defaultValue={inputTypes[0]}>
               {inputTypes.map(type => <Select.Option key={type} value={type}>{type}</Select.Option>)}
@@ -146,33 +146,37 @@ const RoomsInput = ({ setRoomsByShard }) => {
         </Col>
 
       </Row>
-      <table>
-        <tbody>
+      <Space>
+        <table>
+          <tbody>
 
-          {
-            inputList.map((input, index) => {
-              return (
+            {
+              inputList.map((input, index) => {
+                return (
 
-                <tr className={"ipt"} >
-                  <td>{input.shard}</td>
-                  <td>{input.type}</td>
-                  <td>{input.rooms}</td>
-                  <td>{input.range}</td>
-                  <td>
-                    <Button onClick={() => {
-                      const newInputList = [...inputList]
-                      newInputList.splice(index, 1)
-                      setInputList(newInputList)
-                    }}>删除</Button>
-                  </td>
-                </tr>
+                  <tr className={"ipt"} key={index} style={{
+                    border: '1px solid #ccc',
+                    borderRadius: '5px',
+                  }} >
+                    <td>{input.shard}</td>
+                    <td>{input.type}</td>
+                    <td>{input.rooms}</td>
+                    <td>{input.range}</td>
+                    <td>
+                      <Button onClick={() => {
+                        const newInputList = [...inputList]
+                        newInputList.splice(index, 1)
+                        setInputList(newInputList)
+                      }}>删除</Button>
+                    </td>
+                  </tr>
 
 
-              )
-            })}
-        </tbody>
-
-      </table>
+                )
+              })}
+          </tbody>
+        </table>
+      </Space>
 
     </div>
   )
