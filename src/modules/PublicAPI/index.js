@@ -32,7 +32,7 @@ const PublicAPI = () => {
     <div className="public-api">
       {
         APIs.map(api =>
-          <APIInfo api={api} />
+          <APIInfo api={api} key={api.name} />
         )
       }
     </div>
