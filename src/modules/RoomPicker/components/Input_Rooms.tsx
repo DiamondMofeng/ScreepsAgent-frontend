@@ -68,14 +68,14 @@ const parseInputList = (inputList: InputedRooms[]): RoomsByShard => {
 //* ////////////////////component//////////////////////
 
 
-const RoomsInput = ({ setRoomsByShard }) => {
+const InputRooms = ({ setRoomsByShard }) => {
 
   const [inputList, setInputList] = React.useState<InputedRooms[]>([])  //用于保存 输入的房间列表,留给useEffect解析为RoomsByShard
 
   const [shard, setShard] = React.useState<ShardName>('shard3')
   const [type, setType] = React.useState<'all' | 'range' | 'between'>('all')
-  const [range, setRange] = React.useState<number | undefined>(1)
-  const [roomsInput, setRoomsInput] = React.useState<string[] | undefined>([])  //用于between,range中接受手动输入的rooms
+  const [range, setRange] = React.useState<number | undefined>(undefined)
+  const [roomsInput, setRoomsInput] = React.useState<string[] | undefined>(undefined)  //用于between,range中接受手动输入的rooms
 
   useEffect(() => {
     setRoomsByShard(parseInputList(inputList))
@@ -105,8 +105,9 @@ const RoomsInput = ({ setRoomsByShard }) => {
       <Row>
         <Col span={2}>
           <Button onClick={() => {
-            const newInputList = [...inputList, { shard, type, rooms: roomsInput, range }]
-            setInputList(newInputList)
+            const newInput = { shard, type, rooms: roomsInput, range }
+            setInputList([...inputList, newInput])
+            console.log(newInput)
             // setRooms(parseInputList(newInputList))
           }
           }>添加</Button>
@@ -146,41 +147,52 @@ const RoomsInput = ({ setRoomsByShard }) => {
         </Col>
 
       </Row>
-      <Space>
-        <table>
-          <tbody>
 
-            {
-              inputList.map((input, index) => {
-                return (
-
-                  <tr className={"ipt"} key={index} style={{
-                    border: '1px solid #ccc',
-                    borderRadius: '5px',
-                  }} >
-                    <td>{input.shard}</td>
-                    <td>{input.type}</td>
-                    <td>{input.rooms}</td>
-                    <td>{input.range}</td>
-                    <td>
-                      <Button onClick={() => {
-                        const newInputList = [...inputList]
-                        newInputList.splice(index, 1)
-                        setInputList(newInputList)
-                      }}>删除</Button>
-                    </td>
-                  </tr>
-
-
+      {inputList.length > 0 &&
+        <Space>
+          <table style={{ border: '1px solid #ccc', }}>
+            <thead><tr>
+              {
+                Object.keys(inputList[0]).map(k =>
+                  <td key={k}>{k}</td>
                 )
-              })}
-          </tbody>
-        </table>
-      </Space>
+              }
+            </tr></thead>
+            <tbody>
+              {
+                inputList.map((input, index) => {
+                  return (
 
+                    <tr className={"ipt"} key={index} style={{
+
+                      borderRadius: '5px',
+                      padding: '5px',
+                      margin: '5px',
+                      backgroundColor: '#ffffff'
+                    }} >
+                      <td className="input-table-td">{input.shard}</td>
+                      <td className="input-table-td">{input.type}</td>
+                      <td className="input-table-td">{input?.range ?? '---'}</td>
+                      <td className="input-table-td">{input?.rooms?.join(',') ?? '---'}</td>
+                      <td className="input-table-td">
+                        <Button onClick={() => {
+                          const newInputList = [...inputList]
+                          newInputList.splice(index, 1)
+                          setInputList(newInputList)
+                        }}>删除</Button>
+                      </td>
+                    </tr>
+
+
+                  )
+                })}
+            </tbody>
+          </table>
+        </Space>
+      }
     </div>
   )
 }
 
-export default RoomsInput
+export default InputRooms
 

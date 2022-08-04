@@ -7,7 +7,7 @@ import { getRoomsBetween } from "./utils/genRoomLists"
 import Ruleset from "./components/Ruleset"
 
 //@ts-ignore
-import RoomsInput from "./components/RoomsInput.tsx"
+import InputRooms from "./components/Input_Rooms.tsx"
 //@ts-ignore
 import InputedRoomsInfo from "./components/InputedRoomsInfo.tsx"
 
@@ -21,10 +21,10 @@ const RoomPicker = () => {
     <div className="RoomPicker" >
       <h1>选房器</h1>
       施工中...
-      <RoomsInput setRoomsByShard={setRoomsByShard} />
+      <InputRooms setRoomsByShard={setRoomsByShard} />
       <InputedRoomsInfo roomsByShard={roomsByShard} />
       <Ruleset />
-
+      
 
 
     </div>
