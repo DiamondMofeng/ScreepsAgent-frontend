@@ -27,44 +27,83 @@ const resMap = {
 
   "lab资源": {
     "Basic": [C.RESOURCE_HYDROXIDE, C.RESOURCE_ZYNTHIUM_KEANITE, C.RESOURCE_UTRIUM_LEMERGITE, C.RESOURCE_GHODIUM],
-    // "UH": ["UH"]
-    "T3": [
+    "U": [
+      C.RESOURCE_UTRIUM_HYDRIDE,
+      C.RESOURCE_UTRIUM_ACID,
       C.RESOURCE_CATALYZED_UTRIUM_ACID,
+      C.RESOURCE_UTRIUM_OXIDE,
+      C.RESOURCE_UTRIUM_ALKALIDE,
       C.RESOURCE_CATALYZED_UTRIUM_ALKALIDE,
-      C.RESOURCE_CATALYZED_KEANIUM_ACID,
-      C.RESOURCE_CATALYZED_KEANIUM_ALKALIDE,
+    ],
+    "L": [
+      C.RESOURCE_LEMERGIUM_HYDRIDE,
+      C.RESOURCE_LEMERGIUM_ACID,
       C.RESOURCE_CATALYZED_LEMERGIUM_ACID,
+      C.RESOURCE_LEMERGIUM_OXIDE,
+      C.RESOURCE_LEMERGIUM_ALKALIDE,
       C.RESOURCE_CATALYZED_LEMERGIUM_ALKALIDE,
+    ],
+    "K": [
+      C.RESOURCE_KEANIUM_HYDRIDE,
+      C.RESOURCE_KEANIUM_ACID,
+      C.RESOURCE_CATALYZED_KEANIUM_ACID,
+      C.RESOURCE_KEANIUM_OXIDE,
+      C.RESOURCE_KEANIUM_ALKALIDE,
+      C.RESOURCE_CATALYZED_KEANIUM_ALKALIDE,
+    ],
+    "Z": [
+      C.RESOURCE_ZYNTHIUM_HYDRIDE,
+      C.RESOURCE_ZYNTHIUM_ACID,
       C.RESOURCE_CATALYZED_ZYNTHIUM_ACID,
+      C.RESOURCE_ZYNTHIUM_OXIDE,
+      C.RESOURCE_ZYNTHIUM_ALKALIDE,
       C.RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE,
+    ],
+    "G": [
+      C.RESOURCE_GHODIUM_HYDRIDE,
+      C.RESOURCE_GHODIUM_ACID,
       C.RESOURCE_CATALYZED_GHODIUM_ACID,
+      C.RESOURCE_GHODIUM_OXIDE,
+      C.RESOURCE_GHODIUM_ALKALIDE,
       C.RESOURCE_CATALYZED_GHODIUM_ALKALIDE,
     ],
-    "T2": [
-      C.RESOURCE_UTRIUM_ACID,
-      C.RESOURCE_UTRIUM_ALKALIDE,
-      C.RESOURCE_KEANIUM_ACID,
-      C.RESOURCE_KEANIUM_ALKALIDE,
-      C.RESOURCE_LEMERGIUM_ACID,
-      C.RESOURCE_LEMERGIUM_ALKALIDE,
-      C.RESOURCE_ZYNTHIUM_ACID,
-      C.RESOURCE_ZYNTHIUM_ALKALIDE,
-      C.RESOURCE_GHODIUM_ACID,
-      C.RESOURCE_GHODIUM_ALKALIDE,
-    ],
+    // "T3": [
+    //   C.RESOURCE_CATALYZED_UTRIUM_ACID,
+    //   C.RESOURCE_CATALYZED_UTRIUM_ALKALIDE,
+    //   C.RESOURCE_CATALYZED_KEANIUM_ACID,
+    //   C.RESOURCE_CATALYZED_KEANIUM_ALKALIDE,
+    //   C.RESOURCE_CATALYZED_LEMERGIUM_ACID,
+    //   C.RESOURCE_CATALYZED_LEMERGIUM_ALKALIDE,
+    //   C.RESOURCE_CATALYZED_ZYNTHIUM_ACID,
+    //   C.RESOURCE_CATALYZED_ZYNTHIUM_ALKALIDE,
+    //   C.RESOURCE_CATALYZED_GHODIUM_ACID,
+    //   C.RESOURCE_CATALYZED_GHODIUM_ALKALIDE,
+    // ],
+    // "T2": [
+    //   C.RESOURCE_UTRIUM_ACID,
+    //   C.RESOURCE_UTRIUM_ALKALIDE,
+    //   C.RESOURCE_KEANIUM_ACID,
+    //   C.RESOURCE_KEANIUM_ALKALIDE,
+    //   C.RESOURCE_LEMERGIUM_ACID,
+    //   C.RESOURCE_LEMERGIUM_ALKALIDE,
+    //   C.RESOURCE_ZYNTHIUM_ACID,
+    //   C.RESOURCE_ZYNTHIUM_ALKALIDE,
+    //   C.RESOURCE_GHODIUM_ACID,
+    //   C.RESOURCE_GHODIUM_ALKALIDE,
+    // ],
 
-    "T1": [
-      C.RESOURCE_UTRIUM_HYDRIDE,
-      C.RESOURCE_UTRIUM_OXIDE,
-      C.RESOURCE_KEANIUM_HYDRIDE,
-      C.RESOURCE_KEANIUM_OXIDE,
-      C.RESOURCE_LEMERGIUM_HYDRIDE,
-      C.RESOURCE_LEMERGIUM_OXIDE,
-      C.RESOURCE_ZYNTHIUM_HYDRIDE,
-      C.RESOURCE_ZYNTHIUM_OXIDE,
-      C.RESOURCE_GHODIUM_HYDRIDE,
-      C.RESOURCE_GHODIUM_OXIDE,
-    ]
+    // "T1": [
+    //   C.RESOURCE_UTRIUM_HYDRIDE,
+    //   C.RESOURCE_UTRIUM_OXIDE,
+    //   C.RESOURCE_KEANIUM_HYDRIDE,
+    //   C.RESOURCE_KEANIUM_OXIDE,
+    //   C.RESOURCE_LEMERGIUM_HYDRIDE,
+    //   C.RESOURCE_LEMERGIUM_OXIDE,
+    //   C.RESOURCE_ZYNTHIUM_HYDRIDE,
+    //   C.RESOURCE_ZYNTHIUM_OXIDE,
+    //   C.RESOURCE_GHODIUM_HYDRIDE,
+    //   C.RESOURCE_GHODIUM_OXIDE,
+    // ]
   },
 
   "商品资源": {
@@ -119,7 +158,7 @@ const resMap = {
 
 const Resource = ({ name, amount }) => {
   return (
-    <Statistic title={name} value={amount} precision={0} valueStyle={{ color: RES_COLORS[name] }} style={{ color: RES_COLORS[name] }} />
+    <Statistic title={name} value={amount} precision={0} valueStyle={{ color: RES_COLORS[name], fontSize: '20px' }} style={{ color: RES_COLORS[name] }} />
   )
 }
 
@@ -137,7 +176,7 @@ const ResourcesView = ({ resources }) => {
             <div className="resource-list">
               {
                 Object.keys(resMap[mainCategory]).map(subCatagory => (
-                  <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                  <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} key={subCatagory}>
                     {Object.values(resMap[mainCategory][subCatagory]).map(resName => (
                       <Col key={resName} span={3}>
                         <Resource key={resName} name={resName} amount={resources[resName]} />
