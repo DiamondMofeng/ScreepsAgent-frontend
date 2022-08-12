@@ -129,7 +129,9 @@ const RoomInfo = (props) => {
 
   const PopoverContent = () => {
     return (
-      <div className="room-info-popover" style={{ width: "500px" }}>
+      <div className="room-info-popover"
+        // style={{ width: "500px" }}
+      >
         <h1>{`${shard}/${roomName}`}</h1>
         <Statistic title="平均墙厚度" value={getAvgWallHits()} />
         <ResourcesView resources={getResources()} />

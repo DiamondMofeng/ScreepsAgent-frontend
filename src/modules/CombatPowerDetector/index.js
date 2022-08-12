@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import officialService from "../Common/services/officialService"
 
-import OverallInfo from "./components/OverallInfo"
+import Overview from "./components/Overview"
 import { Input, message, Progress, Skeleton } from "antd"
 import ShardsRoomInfoList from "./components/ShardsRoomInfoList"
 
@@ -208,7 +208,7 @@ const CombatPowerDetector = () => {
         [4].includes(stage)
           ?
           <>
-            <OverallInfo playerName={playerName} badge={userBadge} allShardsRoomsObjects={roomObjectsByShard} />
+            <Overview playerName={playerName} badge={userBadge} allShardsRoomsObjects={roomObjectsByShard} />
           </>
           : null
       }

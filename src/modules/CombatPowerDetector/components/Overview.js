@@ -1,7 +1,7 @@
 import Badge from "../../Common/components/Badge"
 
 
-const OverallInfo = ({ playerName, badge, allShardsRoomsObjects }) => {
+const Overview = ({ playerName, badge, allShardsRoomsObjects }) => {
 
 
   const roomCountsByShard = {}
@@ -79,5 +79,5 @@ const OverallInfo = ({ playerName, badge, allShardsRoomsObjects }) => {
 
 }
 
-export default OverallInfo
+export default Overview
 
