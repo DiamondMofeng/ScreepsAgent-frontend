@@ -2,12 +2,11 @@ import React from "react"
 import { useState } from "react"
 import { getRoomsBetween } from "./utils/genRoomLists"
 
-
-
-import Ruleset from "./components/Ruleset"
+//@ts-ignore
+import Ruleset from "./components/Ruleset/Ruleset.tsx"
 
 //@ts-ignore
-import InputRooms from "./components/Input_Rooms.tsx"
+import InputRooms from "./components/Input_Rooms_new.tsx"
 //@ts-ignore
 import InputedRoomsInfo from "./components/InputedRoomsInfo.tsx"
 

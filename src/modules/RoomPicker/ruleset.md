@@ -52,8 +52,8 @@ rule sets:
     
 | rule                  | 参数    | 效果                        |
 | --------------------- | ------- | --------------------------- |
-| minSourceCount        | n       | 最小能源数                  |
-| certainMineralTypes   | type[ ] | 仅保留选定的几种mineralType |
+| sourceCount           | n       | 能源数                      |
+| mineralTypes          | type[ ] | 仅保留选定的几种mineralType |
 | maxExitDirectionCount | 1-4     | 最大出口方向数              |
 | minExitCount          | n       | 最小出口格总数              |
 | minPlainCount         | n       | 最小平原数                  |
