@@ -1,6 +1,13 @@
 // @ts-ignore
 import { isHighwayNeighbour, isHighwayRooms, isCenter9Rooms } from "./utils/filter/ByRoomName.ts"
 
+// export type RuleName =
+//   | 'HighwayRooms' | 'CenterRooms' | 'HighwayNeighbour'
+
+//   | 'ActiveRooms' | 'NoviceArea' | 'RespawnArea' | 'NoviceAndRespawnArea' | 'ClaimableRooms'
+
+//   | 'SourceCount' | 'MineralType' | 'ExitDirectionCount' | 'MaxExitCount' | 'MinPlainCount' | 'MaxSwampCount' | 'MaxWallCount';
+
 export const byRoomName: Rule[] = [
   {
     name: 'HighwayRooms',
@@ -16,9 +23,9 @@ export const byRoomName: Rule[] = [
   },
   {
     name: 'HighwayNeighbour',
-    description: '临近过道.参数为与过道最大距离',
+    description: '临近过道',
     type: 'RoomName',
-    uniqueVal: [1, 2, 3],
+    // uniqueVal: [1, 2, 3],
     filter: isHighwayNeighbour
   },
 ]
@@ -54,43 +61,43 @@ export const byMapStats: Rule[] = [
 
 export const byStatic: Rule[] = [
   {
-    name: 'sourceCount',
+    name: 'SourceCount',
     description: '能源数',
     type: 'Static',
     multiVal: [1, 2],
   },
   {
-    name: 'mineralType',
+    name: 'MineralType',
     description: '矿物种类',
     type: 'Static',
     multiVal: ['O', 'H', 'U', 'K', 'L', 'Z', 'X'],
   },
   {
-    name: 'exitDirectionCount',
+    name: 'ExitDirectionCount',
     description: '出口方向数',
     type: 'Static',
     multiVal: [1, 2, 3, 4],
   },
   {
-    name: 'maxExitCount',
+    name: 'MaxExitCount',
     description: '最大出口格总数',
     type: 'Static',
     freeVal: true,
   },
   {
-    name: 'minPlainCount',
+    name: 'MinPlainCount',
     description: '最小平原数',
     type: 'Static',
     freeVal: true,
   },
   {
-    name: 'maxSwampCount',
+    name: 'MaxSwampCount',
     description: '最大沼泽数',
     type: 'Static',
     freeVal: true,
   },
   {
-    name: 'maxWallCount',
+    name: 'MaxWallCount',
     description: '最大墙壁数',
     type: 'Static',
     freeVal: true,

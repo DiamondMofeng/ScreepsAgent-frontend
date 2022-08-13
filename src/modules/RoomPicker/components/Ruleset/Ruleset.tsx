@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react"
 //@ts-ignore
-import SingleRule from "./SingleRule.tsx"
+import SingleRule, { ActiveRule } from "./SingleRule.tsx"
 
 //@ts-ignore
 import Rules from '../../config_rules.tsx'
@@ -10,10 +10,11 @@ import Rules from '../../config_rules.tsx'
 
 
 
+const Ruleset = ({ activeRules, setActiveRules }: {
+  activeRules:ActiveRule[],
+  setActiveRules: React.Dispatch<React.SetStateAction<ActiveRule[]>>
+}) => {
 
-const Ruleset = () => {
-
-  const [activeRules, setActiveRules] = useState<ActiveRule[]>([])
   console.log('activeRules: ', activeRules);
 
   return (

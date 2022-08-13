@@ -7,7 +7,14 @@ import C from '../../../utils/consts'
 const corsPrefix = C.corsUrl + '/'
 const corsOfficialUrl = corsPrefix + 'https://screeps.com/api/'
 
+const xToken = 'X-Token'
 
+const headers = {
+  'X-Username': 'foobar',
+}
+export const setToken = (token) => {
+  headers[xToken] = token
+}
 
 // ============================================================
 // USER API
@@ -34,6 +41,37 @@ export const user_rooms = async (id) => {
   return response.data['shards']
 }
 
+// ============================================================
+// MAP API
+
+/**
+ * 
+ * @param {string[]} rooms 
+ * @param {string} shard 
+ * @param {string} statName
+ */
+export const map_stats = async (rooms, shard, statName = 'claim0') => {
+
+  if (rooms === undefined || shard === undefined) {
+    throw new Error('rooms and shard must be defined')
+  }
+
+  if (!headers[xToken]) {
+    throw new Error('token must be set using setToken()')
+  }
+
+  const payload = {
+    rooms: rooms,
+    shard: shard,
+    statName: statName
+  }
+
+  const response = await axios.post(corsOfficialUrl + '/game/map-stats', payload, {
+    headers: headers,
+  })
+  return response.data
+
+}
 
 // ============================================================
 // ROOM API
@@ -52,10 +90,14 @@ export const room_objects = async (room = undefined, shard = undefined) => {
 }
 
 const officialService = {
+  setToken,
+
   user_find,
   user_rooms,
 
-  room_objects
+  map_stats,
+
+  room_objects,
 }
 
 export default officialService

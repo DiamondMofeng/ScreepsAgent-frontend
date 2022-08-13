@@ -5,7 +5,7 @@ type ShardName = `shard${AvailableshardNumber}`
 type RoomName = string
 
 type RoomsByShard = {
-    [K in ShardName]: RoomName[];
+    [K in ShardName]?: RoomName[];
 }
 
 
@@ -20,9 +20,16 @@ type RoomsByShard = {
 
 type RuleType = 'RoomName' | 'MapStats' | 'Static'
 
+type RuleName =
+    | 'HighwayRooms' | 'CenterRooms' | 'HighwayNeighbour'
+
+    | 'ActiveRooms' | 'NoviceArea' | 'RespawnArea' | 'NoviceAndRespawnArea' | 'ClaimableRooms'
+
+    | 'SourceCount' | 'MineralType' | 'ExitDirectionCount' | 'MaxExitCount' | 'MinPlainCount' | 'MaxSwampCount' | 'MaxWallCount';
+
 type Rule = {
     // id: string;
-    name: string;
+    name: RuleName;
     description: string;
 
     type: RuleType
@@ -34,9 +41,52 @@ type Rule = {
     filter?: Function
 }
 
-interface Rule_ByRoomName extends Rule {
-
+type FilterMap = {
+    [K in RuleName]?: (...args: any[]) => boolean;
 }
+
+
+type AllShardMapStats = {
+    [K in ShardName]?: MapStats;
+}
+
+type MapStats = {
+    [roomName: RoomName]: RoomStats
+}
+
+// interface Stats {
+//     roomName?: RoomName;
+// }
+
+interface RoomStats {
+    isPowerEnabled?: boolean;
+    minerals0?: Minerals0;
+    novice?: number;
+    own?: Own;
+    respawnArea?: number;
+    sign?: Sign;
+    status: "normal"|"out of borders"
+}
+
+interface Minerals0 {
+    density: string;
+    type?: string;
+}
+
+interface Own {
+    level: number;
+    user: string;
+}
+
+interface Sign {
+    datetime: number;
+    text: string;
+    time: number;
+    user: string;
+}
+
+
+
 
 
 

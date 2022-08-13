@@ -10,19 +10,33 @@
 
 */
 
+//@ts-ignore
+import { ActiveRule } from "../../components/Ruleset/SingleRule.tsx";
+//@ts-ignore
+import { getFilters } from "./common.ts";
 
-// export function filter_byRoomName(rooms, ruleSet) {
+const filterMap = {
+  HighwayRooms: isHighwayRooms,
+  CenterRooms: isCenter9Rooms,
+  HighwayNeighbour: isHighwayNeighbour,
+}
 
-//   const ruleToFilter = {
-//     "ignoreHighwayRooms": ignoreHighwayRooms,
-//     "ignoreCenter9Rooms": ignoreCenter9Rooms,
-//     "onlyHighwayNeighbour": onlyHighwayNeighbour,
-//   }
-//   const filters = ruleSet.map(rule => ruleToFilter[rule])
-//   const filteredRooms = filters.reduce((acc, filter) => acc.filter(filter), rooms)
-//   return filteredRooms
+export function filterByRoomName(roomsByShard: RoomsByShard, rules: ActiveRule[]): RoomsByShard {
+  const filteredRoomsByShard: RoomsByShard = {};
 
-// }
+  const filters = getFilters(rules, filterMap);
+  if (!filters.length) {
+    return roomsByShard
+  }
+
+  Object.keys(roomsByShard).forEach(shard => {
+    filteredRoomsByShard[shard] = roomsByShard[shard].filter(roomName => {
+      return filters.every(filter => filter(roomName))
+    })
+  });
+
+  return filteredRoomsByShard;
+}
 
 /**
  * 判断是否为高速房间 
@@ -42,7 +56,7 @@ export function isHighwayRooms(roomName) {
  * @returns {Boolean}
  */
 export function isCenter9Rooms(roomName) {
-  const reg_isCenter9 = /[WwNn]\d*[456][NnSs]\d*[456]/
+  const reg_isCenter9 = /^[WwNn]\d*[456][NnSs]\d*[456]$/
   return roomName.match(reg_isCenter9) !== null
 }
 
@@ -53,7 +67,7 @@ export function isCenter9Rooms(roomName) {
  * @param {Number} range
  * @returns 
  */
-export function isHighwayNeighbour(roomName: string, range: number) {
+export function isHighwayNeighbour(roomName: string, range: number = 1) {
   let reg_range: string;
   switch (range) {
     case 1:

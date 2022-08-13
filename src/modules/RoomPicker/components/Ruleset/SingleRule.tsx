@@ -7,15 +7,16 @@ import { useReducer } from "react"
 import { Checkbox, Select, Input, Popover, Row, Col } from "antd"
 
 
-enum IGNORE_OR_ONLY {
+export enum IGNORE_OR_ONLY {
   IGNORE = 0,
   ONLY = 1
 }
 
 const { IGNORE, ONLY } = IGNORE_OR_ONLY
 
-type ActiveRule = {
+export type ActiveRule = {
   ruleName: Rule["name"],
+  type: RuleType,
   enabled: boolean,
   ignoreOrOnly: IGNORE_OR_ONLY
   val?: any,
@@ -50,6 +51,7 @@ const SingleRule = ({ rule, activeRules, setActiveRules }: {
 
   const initialActiveRule: ActiveRule = {
     ruleName: rule.name,
+    type: rule.type,
     enabled: false,
     ignoreOrOnly: IGNORE,
     val: undefined,
@@ -57,7 +59,7 @@ const SingleRule = ({ rule, activeRules, setActiveRules }: {
 
   // type DispatcherActionTypes = 'enable' | 'disable' | 'changeIgnoreOrOnly' | 'changeVal';
 
-  type ValType = 'uniqueVal' | 'multiVal' | 'freeVal'
+  // type ValType = 'uniqueVal' | 'multiVal' | 'freeVal'
 
   type DispatcherAction =
     | {
