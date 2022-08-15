@@ -158,7 +158,7 @@ const CombatPowerDetector = () => {
         setUserBandge(res['badge'])
 
         return officialService.user_rooms(userID)
-      }).catch(err => { message.error(`获取${playerName}的 ID失败!`) })
+      }).catch(() => { message.error(`获取${playerName}的 ID失败!`) })
 
       .then(userRooms => {
         setUserRooms(userRooms)
@@ -166,7 +166,7 @@ const CombatPowerDetector = () => {
         // console.log("stage3")
 
         return queryRoomObjectsFromRooms_thenSet_async(userRooms)
-      }).catch(err => { message.error(`获取${playerName}的 房间列表失败!`) })
+      }).catch(() => { message.error(`获取${playerName}的 房间列表失败!`) })
 
       .then(roomObjectsByShard => {
         // console.log('roomObjectsByShard: ', roomObjectsByShard);

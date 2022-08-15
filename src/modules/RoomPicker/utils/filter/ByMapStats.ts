@@ -8,12 +8,9 @@
 //  | RespawnArea          | -    | 重生房       |
 //  | NoviceAndRespawnArea | -    | 新手和重生房 |
 
-//@ts-ignore
-import { ActiveRule } from "../../components/Ruleset/SingleRule.tsx";
-//@ts-ignore
-import gamedataService from "../../services/gamedataService.tsx";
-//@ts-ignore
-import { getFilters } from "./common.ts";
+import { ActiveRule } from "../../components/Ruleset/SingleRule";
+import gamedataService from "../../services/gamedataService";
+import { getFilters } from "./common";
 
 const filterMap: FilterMap = {
   ActiveRooms: isActiveRoom,

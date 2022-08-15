@@ -1,16 +1,11 @@
 import React from "react"
 import { useState } from "react"
-import { getRoomsBetween } from "./utils/genRoomLists"
 
-//@ts-ignore
-import Ruleset from "./components/Ruleset/Ruleset.tsx"
+import Ruleset from "./components/Ruleset/Ruleset"
 
-//@ts-ignore
-import InputRooms from "./components/Input_Rooms_new.tsx"
-//@ts-ignore
-import InputedRoomsInfo from "./components/InputedRoomsInfo.tsx"
-//@ts-ignore
-import ResultView from "./components/ResultView.tsx"
+import InputRooms from "./components/Input_Rooms_new"
+import InputedRoomsInfo from "./components/InputedRoomsInfo"
+import ResultView from "./components/ResultView"
 import { ActiveRule } from "./components/Ruleset/SingleRule"
 
 const shards = ['shard0', 'shard1', 'shard2', 'shard3']

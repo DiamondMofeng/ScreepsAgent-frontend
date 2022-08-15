@@ -1,5 +1,4 @@
-//@ts-ignore
-import { ActiveRule, IGNORE_OR_ONLY } from "../../components/Ruleset/SingleRule.tsx";
+import { ActiveRule, IGNORE_OR_ONLY } from "../../components/Ruleset/SingleRule";
 
 
 export const getFilters = (rules: ActiveRule[], filterMap) => {

@@ -2,13 +2,12 @@ import React from "react";
 
 import { Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table';
-//@ts-ignore
-import RoomImage, { SimpleRoomObjects } from "./ResultView/RoomImage.tsx";
+import RoomImage, { SimpleRoomObjects } from "./ResultView/RoomImage";
 
 
 const ROOM_IMAGE_SIZE = 100 //default size is 150
 
-const getExitCountFromPerDirection = (value: string): number => Object.values(JSON.parse(value) as Object).reduce((acc, cur) => acc + cur, 0)
+const getExitCountFromPerDirection = (value: string): number => Object.values(JSON.parse(value) as { [direction: string]: number }).reduce((acc, cur) => acc + cur, 0)
 
 
 

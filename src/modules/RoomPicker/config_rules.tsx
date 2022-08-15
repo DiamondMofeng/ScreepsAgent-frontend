@@ -1,5 +1,4 @@
-// @ts-ignore
-import { isHighwayNeighbour, isHighwayRooms, isCenter9Rooms } from "./utils/filter/ByRoomName.ts"
+import { isHighwayNeighbour, isHighwayRooms, isCenter9Rooms } from "./utils/filter/ByRoomName"
 
 // export type RuleName =
 //   | 'HighwayRooms' | 'CenterRooms' | 'HighwayNeighbour'

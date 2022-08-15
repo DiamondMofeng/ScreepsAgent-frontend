@@ -35,22 +35,25 @@ const parseInputList = (inputList: InputedRooms[]): RoomsByShard => {
   const result = Object.fromEntries(shards.map(shard => [shard, [] as string[]])) as RoomsByShard
   for (const input of inputList) {
     switch (input.type) {
-      case 'all':
+      case 'all': {
         const TL = `W${farestRoomSite[input.shard]}N${farestRoomSite[input.shard]}`
         const BR = `E${farestRoomSite[input.shard]}S${farestRoomSite[input.shard]}`
         result[input.shard] = result[input.shard].concat(getRoomsBetween(TL, BR))
         break;
-      case 'range':
+      }
+      case 'range': {
         input.rooms!.forEach(room => {
           result[input.shard] = result[input.shard].concat(getRoomsInRange(room, input.range!))
         })
         break;
-      case 'between':
+      }
+      case 'between': {
         if (input.rooms!.length !== 2) {
           throw new Error('between must have exactly 2 rooms')  //这里就作为Error了
         }
         result[input.shard] = result[input.shard].concat(getRoomsBetween(input.rooms![0], input.rooms![1]))
         break
+      }
       default:
         break;
     }

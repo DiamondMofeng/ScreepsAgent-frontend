@@ -1,10 +1,7 @@
 import React from "react"
-import { useState } from "react"
-//@ts-ignore
-import SingleRule, { ActiveRule } from "./SingleRule.tsx"
+import SingleRule, { ActiveRule } from "./SingleRule"
 
-//@ts-ignore
-import Rules from '../../config_rules.tsx'
+import Rules from '../../config_rules'
 
 
 

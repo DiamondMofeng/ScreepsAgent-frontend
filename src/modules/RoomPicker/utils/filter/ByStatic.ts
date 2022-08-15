@@ -11,10 +11,8 @@
 // | maxSwampCount         | n       | 最小沼泽数                  |
 // | maxWallCount          | n       | 最小墙壁数                  |
 
-//@ts-ignore
-import { ActiveRule } from "../../components/Ruleset/SingleRule.tsx";
-//@ts-ignore
-import { getFilters } from "./common.ts";
+import { ActiveRule } from "../../components/Ruleset/SingleRule";
+import { getFilters } from "./common";
 
 const filterMap = {
   ActiveRoom: isActiveRoom,

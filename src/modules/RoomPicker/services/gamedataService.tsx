@@ -33,7 +33,7 @@ export const getAllShardMapStats = async (roomsByShard: RoomsByShard) => {
   return allShardMapStats
 }
 
-export async function rooms_info(rooms: RoomName[], shard: ShardName, rules: undefined = undefined) {
+export async function rooms_info(rooms: RoomName[], shard: ShardName, rules = undefined) {
   const res = await axios.post(baseUrl + '/api/gamedata/rooms-info', { rooms, shard, rules })
   // console.log('res : ', res);
 

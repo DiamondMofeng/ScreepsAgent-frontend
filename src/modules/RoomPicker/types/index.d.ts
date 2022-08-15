@@ -38,7 +38,7 @@ type Rule = {
     multiVal?: any[];
     freeVal?: any;
 
-    filter?: Function
+    filter?: (any: any) => boolean
 }
 
 type FilterMap = {
@@ -110,7 +110,7 @@ interface RoomInfo {
     // terrainExitPerDirection: {
     //     [direction: string]: number;
     // };
-    terrainExitPerDirection:string; //JSON
+    terrainExitPerDirection: string; //JSON
 
     terrainPlainCount: number;
     terrainSwampCount: number;

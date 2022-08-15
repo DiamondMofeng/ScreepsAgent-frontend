@@ -10,10 +10,8 @@
 
 */
 
-//@ts-ignore
-import { ActiveRule } from "../../components/Ruleset/SingleRule.tsx";
-//@ts-ignore
-import { getFilters } from "./common.ts";
+import { ActiveRule } from "../../components/Ruleset/SingleRule";
+import { getFilters } from "./common";
 
 const filterMap = {
   HighwayRooms: isHighwayRooms,
@@ -67,7 +65,7 @@ export function isCenter9Rooms(roomName) {
  * @param {Number} range
  * @returns 
  */
-export function isHighwayNeighbour(roomName: string, range: number = 1) {
+export function isHighwayNeighbour(roomName: string, range = 1) {
   let reg_range: string;
   switch (range) {
     case 1:
@@ -89,6 +87,6 @@ export function isHighwayNeighbour(roomName: string, range: number = 1) {
   return roomName.match(reg_isHighwayNeighbour) !== null
 }
 
-const exports = {}
+const exp = {}
 
-export default exports
+export default exp

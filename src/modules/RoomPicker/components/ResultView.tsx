@@ -1,18 +1,11 @@
 import React from 'react';
-//@ts-ignore
-import { filterByRoomName } from '../utils/filter/ByRoomName.ts';
-//@ts-ignore
-// import InputedRoomsInfo from './InputedRoomsInfo.tsx';
-//@ts-ignore
-import { ActiveRule } from './Ruleset/SingleRule.tsx';
-//@ts-ignore
-// import gameService from '../services/gamedataService.tsx';
-//@ts-ignore
-import { filterByMapStats } from '../utils/filter/ByMapStats.ts';
-//@ts-ignore
-import gamedataService from '../services/gamedataService.tsx';
-//@ts-ignore
-import ResultViewTable from './ResultViewTable.tsx';
+import { filterByRoomName } from '../utils/filter/ByRoomName';
+// import InputedRoomsInfo from './InputedRoomsInfo';
+import { ActiveRule } from './Ruleset/SingleRule';
+// import gameService from '../services/gamedataService';
+import { filterByMapStats } from '../utils/filter/ByMapStats';
+import gamedataService from '../services/gamedataService';
+import ResultViewTable from './ResultViewTable';
 
 /**
  * Block View,List(Table) View,Map View

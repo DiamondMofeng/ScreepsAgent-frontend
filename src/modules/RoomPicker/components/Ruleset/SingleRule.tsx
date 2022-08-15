@@ -96,7 +96,7 @@ const SingleRule = ({ rule, activeRules, setActiveRules }: {
         break;
       default:
         console.log('unknown action!!');
-    };
+    }
     return newAvtiveRule;
   }
 
