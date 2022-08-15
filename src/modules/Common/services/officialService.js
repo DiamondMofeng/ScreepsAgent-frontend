@@ -66,7 +66,7 @@ export const map_stats = async (rooms, shard, statName = 'claim0') => {
     statName: statName
   }
 
-  const response = await axios.post(corsOfficialUrl + '/game/map-stats', payload, {
+  const response = await axios.post(corsOfficialUrl + 'game/map-stats', payload, {
     headers: headers,
   })
   return response.data

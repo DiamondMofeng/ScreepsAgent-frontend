@@ -4,7 +4,7 @@ import officialService from "../../Common/services/officialService"
 import { ActiveRule } from "../components/Ruleset/SingleRule"
 
 
-export const getTempToken = async (): Promise<string> => {
+export const temp_token = async (): Promise<string> => {
   const response = await axios.get(baseUrl + '/api/gamedata/temp-token')
   return response.data.token
 }
@@ -21,7 +21,7 @@ export const getAllShardMapStats = async (roomsByShard: RoomsByShard) => {
     return {}
   }
 
-  const tempToken = await getTempToken()
+  const tempToken = await temp_token()
   officialService.setToken(tempToken)
 
   const getShardMapStats = async (rooms, shard) => {
@@ -33,19 +33,36 @@ export const getAllShardMapStats = async (roomsByShard: RoomsByShard) => {
   return allShardMapStats
 }
 
+export async function rooms_info(rooms: RoomName[], shard: ShardName, rules: undefined = undefined) {
+  const res = await axios.post(baseUrl + '/api/gamedata/rooms-info', { rooms, shard, rules })
+  // console.log('res : ', res);
 
-export const queryByRooms = async (roomsByShard: RoomsByShard, rules: ActiveRule[]) => {
-  /**
-   * 1. 根据房间名过滤房间
-   * 2. 根据map-stats过滤房间
-   */
+  return res.data
+}
+
+
+export const getAllShardRoomsInfo = async (roomsByShard: RoomsByShard, rules: ActiveRule[]): Promise<AllShardRoomsInfo> => {
+  Object.entries(roomsByShard).forEach(([shard, rooms]) => {
+    if (rooms.length === 0) {
+      delete roomsByShard[shard]
+    }
+  })
+
+  const getShardRoomsInfo = async (rooms: RoomName[], shard, rules) => {
+    return [shard, await rooms_info(rooms, shard, rules)]
+  }
+
+  const AllShardRoomsInfo = Object.fromEntries(await Promise.all(Object.entries(roomsByShard)
+    .map(([shard, rooms]) => getShardRoomsInfo(rooms, shard, rules))))
+
+  return AllShardRoomsInfo
 
 }
 
 const gamedataService = {
-  getTempToken,
+  getTempToken: temp_token,
   getAllShardMapStats,
-  queryByRooms,
+  getAllShardRoomsInfo
 
 }
 

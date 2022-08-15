@@ -65,7 +65,7 @@ interface RoomStats {
     own?: Own;
     respawnArea?: number;
     sign?: Sign;
-    status: "normal"|"out of borders"
+    status: "normal" | "out of borders"
 }
 
 interface Minerals0 {
@@ -86,6 +86,39 @@ interface Sign {
 }
 
 
+
+type AllShardRoomsInfo = {
+    [K in ShardName]?: RoomsInfo;
+}
+
+type RoomsInfo = {
+    [roomName: RoomName]: RoomInfo;
+}
+
+
+interface RoomInfo {
+    room: string;
+    shard: string;
+    sourceCount: number;
+    mineralType: string;
+
+    controllerPosition: Position[];
+    mineralPosition: Position[];
+    sourcePosition: Position[];
+
+    terrainExitDirectionCount: number;
+    // terrainExitPerDirection: {
+    //     [direction: string]: number;
+    // };
+    terrainExitPerDirection:string; //JSON
+
+    terrainPlainCount: number;
+    terrainSwampCount: number;
+    terrainWallCount: number;
+
+}
+
+type Position = [x: number, y: number];
 
 
 
