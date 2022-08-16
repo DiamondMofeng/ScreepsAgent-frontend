@@ -14,6 +14,7 @@ const COLORS = {
   "default": "#d3d3d3",
 }
 
+const gameMapSideLength = 50;
 
 
 const RoomImage = ({ roomName, shard, simpleObjects, height, width }:
@@ -29,7 +30,6 @@ const RoomImage = ({ roomName, shard, simpleObjects, height, width }:
   const imgRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const gameMapSideLength = 50;
 
   const drawSimpleRoomObjects = (ctx, canvasH, canvasW) => {
 
@@ -45,6 +45,7 @@ const RoomImage = ({ roomName, shard, simpleObjects, height, width }:
       }
     }
   }
+
 
   const onImgLoad = () => {
     let img = imgRef.current!

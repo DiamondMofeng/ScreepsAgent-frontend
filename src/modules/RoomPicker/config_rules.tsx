@@ -53,7 +53,7 @@ export const byMapStats: Rule[] = [
   },
   {
     name: 'ClaimableRooms',
-    description: '可占领房,不区分reserve和claimed',
+    description: '可占领房,仅包括被他人claimed的房间',
     type: 'MapStats',
   },
 ]
@@ -127,9 +127,6 @@ export const byStatic: Rule[] = [
 let allRules: Rule[] = []
 allRules = allRules.concat(byRoomName)
 allRules = allRules.concat(byMapStats)
-// allRules = allRules.concat(bySimpleRoomObjects)
-// allRules = allRules.concat(byDetailedRoomObjects)
-// allRules = allRules.concat(byRoomTerrain)
-allRules = allRules.concat(byStatic)
+// allRules = allRules.concat(byStatic)
 
 export default allRules

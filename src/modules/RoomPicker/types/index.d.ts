@@ -34,6 +34,8 @@ type Rule = {
 
     type: RuleType
 
+    disabled?: boolean;
+
     uniqueVal?: any[];
     multiVal?: any[];
     freeVal?: any;
@@ -102,20 +104,22 @@ interface RoomInfo {
     sourceCount: number;
     mineralType: string;
 
-    controllerPosition: Position[];
-    mineralPosition: Position[];
-    sourcePosition: Position[];
+    controllerPosition: Json<Position[]>;
+    mineralPosition: Json<Position[]>;
+    sourcePosition: Json<Position[]>;
 
     terrainExitDirectionCount: number;
-    // terrainExitPerDirection: {
-    //     [direction: string]: number;
-    // };
-    terrainExitPerDirection: string; //JSON
+    terrainExitPerDirection: Json<ExitPerDirection>
+    // terrainExitPerDirection: string; //JSON
 
     terrainPlainCount: number;
     terrainSwampCount: number;
     terrainWallCount: number;
 
+}
+
+type ExitPerDirection = {
+    [direction: string]: number;
 }
 
 type Position = [x: number, y: number];

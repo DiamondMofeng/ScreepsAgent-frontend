@@ -29,12 +29,13 @@ rule sets:
 ## Filter by map stats
  ( 由 map-stats 过滤)
 
- | rule                 | 参数 | 效果         |
- | -------------------- | ---- | ------------ |
- | activeRoom           | -    | 可用房       |
- | noviceArea           | -    | 新手房       |
- | respawnArea          | -    | 重生房       |
- | noviceAndRespawnArea | -    | 新手和重生房 |
+ | rule                 | 参数 | 效果                |
+ | -------------------- | ---- | ------------------- |
+ | activeRoom           | -    | 可用房              |
+ | noviceArea           | -    | 新手房              |
+ | respawnArea          | -    | 重生房              |
+ | noviceAndRespawnArea | -    | 新手和重生房        |
+ | claimableRooms       | -    | 可占领房(未被claim) |
 
 
 ## Filter by static stats：

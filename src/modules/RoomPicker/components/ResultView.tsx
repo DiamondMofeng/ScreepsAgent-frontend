@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { filterByRoomName } from '../utils/filter/ByRoomName';
-// import InputedRoomsInfo from './InputedRoomsInfo';
 import { ActiveRule } from './Ruleset/SingleRule';
-// import gameService from '../services/gamedataService';
 import { filterByMapStats } from '../utils/filter/ByMapStats';
 import gamedataService from '../services/gamedataService';
 import ResultViewTable from './ResultViewTable';
+import { Button, Skeleton, Spin } from 'antd';
 
 /**
  * Block View,List(Table) View,Map View
@@ -24,10 +23,14 @@ const ResultViewWarpper = ({ roomsByShard, activeRules }: {
   activeRules: ActiveRule[]
 }) => {
 
-  const [results, setResults] = React.useState<any[]>([])
+  const [onLoading, setOnLoading] = useState(false)
+  const [results, setResults] = useState<any[]>([])
 
   //先把数据过滤一遍
   const getFiltedData = async () => {
+
+    setOnLoading(true)
+
     //1. ByRoomName
     const roomsByShard_filteredByRoomName = filterByRoomName(roomsByShard, activeRules)
     console.log("roomsByShard_filteredByRoomName", roomsByShard_filteredByRoomName);
@@ -40,6 +43,7 @@ const ResultViewWarpper = ({ roomsByShard, activeRules }: {
     // const roomsByShard_filteredByStaticData = await filterByStaticData(roomsByShard_filteredByMapStats, activeRules)
     const allShardRoomsInfo = await gamedataService.getAllShardRoomsInfo(roomsByShard_filteredByMapStats, activeRules) as AllShardRoomsInfo
     setResults(flatDataThenTrans(allShardRoomsInfo))
+    setOnLoading(false)
 
 
   }
@@ -66,7 +70,15 @@ const ResultViewWarpper = ({ roomsByShard, activeRules }: {
 
   return (
     <>
-      <button onClick={getFiltedData}>查询</button>
+      <Button onClick={getFiltedData} disabled={onLoading}>查询</Button>
+      {
+        onLoading &&
+        <>
+          <Spin spinning={onLoading} />
+          <Skeleton />
+        </>
+      }
+
       {/* <button onClick={test}>test</button> */}
       <ResultView data={results} />
     </>
@@ -83,7 +95,7 @@ const ResultView = ({ data }: {
   data: any
 }) => {
 
-  type ResultViewType = "Table"
+  // type ResultViewType = "Table" | "Map" | "Card"
 
   if (!data?.length) {
     return <div>没有数据</div>
@@ -91,18 +103,12 @@ const ResultView = ({ data }: {
 
 
 
-  // const columns = Object.keys(data[0]).map(key => {
-  //   return {
-  //     title: key,
-  //     dataIndex: key,
-  //     key: key
-  //   }
-  // })
-
 
   return (
     <div className="ResultView">
       没做完呢
+      <br />
+      找遗产功能由于破坏平衡已被禁用
       <ResultViewTable dataSource={data} />;
     </div>
   )
