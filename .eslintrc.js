@@ -17,7 +17,7 @@ module.exports = {
 
     'no-unused-vars': 'off',  //ts-eslint里面有
     'prefer-const': 'off',
-
+    "no-redeclare": "off",  //ts-eslint里面有
     'no-await-in-loop': 'warn',
 
     //ts
@@ -25,6 +25,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-inferrable-types': 'warn',
     '@typescript-eslint/ban-ts-comment': 'warn',
+    "@typescript-eslint/no-redeclare": ["error", { "ignoreDeclarationMerge": true }],
 
     //react
     'react/react-in-jsx-scope': 'off',
