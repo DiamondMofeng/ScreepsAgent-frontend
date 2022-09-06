@@ -67,7 +67,7 @@ const ResultViewTable = ({ dataSource }: {
       dataIndex: 'room',
       key: 'room',
       width: 100,
-      filterSearch: true,
+      // filterSearch: true,
       filters: ['WN', 'WS', 'EN', 'ES']
         .map(val => ({ text: val, value: val, key: val })),
       onFilter: (value: any, record) => value.split('').every((v: string) => record.room.includes(v)),
